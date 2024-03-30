@@ -40,6 +40,7 @@ exports.getOneProduct = catchAsyncError(async (req, res, next) => {
 
 // Create product  ---Admin
 exports.createProduct = catchAsyncError(async (req, res, next) => {
+  req.body.user = req.user.id  // req.user.id holds the id of the authenticated user
   const product = await Product.create(req.body);
   res.status(201).json({
     success: true,

@@ -68,8 +68,8 @@ Stock: {
   ],
 
   user: {
-    // type: mongoose.Schema.ObjectId,
-    // ref: "User",
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
     type: String,
     required: true,
   },
