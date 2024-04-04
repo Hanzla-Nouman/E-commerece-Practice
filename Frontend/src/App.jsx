@@ -1,13 +1,15 @@
 import Home from "./components/Home";
 import Footer from "./components/layouts/Footer";
 import Header from "./components/layouts/Header";
-import {BrowserRouter as Router} from "react-router-dom";
+import {Route, BrowserRouter as Router, Routes} from "react-router-dom";
 function App() {
   return (
     <>
       <Router>
-        <Header/>
-        <Home/>
+        <Header/> 
+        <Routes>
+        <Route exact path="/" element={<Home/>}/>
+        </Routes>
         <Footer/>
       </Router>
     </>

@@ -1,6 +1,7 @@
 import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
 import Product from "./Product";
+import Metadata from "./Metadata";
 
 const product = {
   images: [
@@ -16,6 +17,7 @@ const product = {
 const Home = () => {
   return (
     <>
+    <Metadata title = "HOME PAGE"/>
       <Box
         m={2}
         display="flex"
@@ -26,7 +28,7 @@ const Home = () => {
         <Typography textAlign="center" variant="h5" fontWeight="600" margin={4}>
           Featured Products
         </Typography>
-        <Box display={"flex"}>
+        <Box display={"flex"}    justifyContent={"space-around"}>
           <Product product={product} />
           <Product product={product} />
           <Product product={product} />

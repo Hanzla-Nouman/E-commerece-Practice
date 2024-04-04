@@ -10,17 +10,20 @@ import { Link } from "@mui/material";
 export default function Product({ product }) {
   const options = {
     edit: false,
-    value: 4,
+    value: 3.5,
     activeColor:"tomato",
-    color:"#7c7d7d"
+    color:"#7c7d7d",
+    size: window.innerWidth  < 600 ? 20 : 25,
+    isHalf: true
   };
   return (
-    <Box m={3}>
-      <Card sx={{ maxWidth: 345 }}>
+    <Box m={3}  >
+      <Card sx={{ maxWidth: 345 }}  >
+        <Box p={2} >
         <Link href={"http://facebook.com"} underline="none" color="inherit">
-          <CardActionArea>
+          <CardActionArea >
             {product.images &&
-              product.images.length > 0 && ( // Check if product.images is defined and not empty
+              product.images.length > 0 && (
                 <CardMedia
                   component="img"
                   height="140"
@@ -28,9 +31,9 @@ export default function Product({ product }) {
                 />
               )}
             <CardContent>
-              <Box display={"flex"} justifyContent={"space-between"}>
+              <Box display={"flex"} justifyContent={"space-between"} >
                 <Typography gutterBottom variant="h5" component="div">
-                  Lizard
+                  {product.name}
                 </Typography>
                 <Box display={"flex"}>
                   <Typography
@@ -59,6 +62,7 @@ export default function Product({ product }) {
           </Button>
           </Box>
         </CardActions>
+        </Box>
       </Card>
     </Box>
   );
