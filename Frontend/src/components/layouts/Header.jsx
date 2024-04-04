@@ -16,7 +16,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = ["Home","Products", "About", "Contact"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
@@ -131,7 +131,7 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={handleCloseNavMenu()}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
