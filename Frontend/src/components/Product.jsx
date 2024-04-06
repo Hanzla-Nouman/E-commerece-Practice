@@ -56,7 +56,7 @@ export default function Product({ product }) {
         <CardActions>
             <Box>
           <ReactStars {...options}/>
-          {/* <span>(256 reviews)</span> */}
+          <span>(256 reviews)</span>
           <Button size="small" color="primary">
             Add to Cart
           </Button>

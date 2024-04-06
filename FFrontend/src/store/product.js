@@ -13,7 +13,7 @@
 //     },
 //     ALL_PRODUCT_SUCCESS: (state, action) => {
 //         console.log("success")
-//         return{ 
+//         return{
 //             loading: false,
 //             products:action.payload.products,
 //             productsCount:action.payload.productsCount
@@ -26,26 +26,36 @@
 // export default productSlice;
 
 // reducer.js
-import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE } from './actionTypes';
+import {
+  FETCH_DATA_REQUEST,
+  FETCH_DATA_SUCCESS,
+  FETCH_DATA_FAILURE,
+} from "./actionTypes";
 
 const initialState = {
-  data: [],
-  loading: false,
-  error: null
+    data: {
+        success: false,
+        totalProducts: 0,
+        productsCount: 0,
+        products: []
+    },
+    error: null,
+    loading: false,
+   
+ 
 };
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_DATA_REQUEST:
-      return { ...state, loading: true, error: null };
+      return { ...state };
     case FETCH_DATA_SUCCESS:
-      return { ...state, loading: false, data: action.payload };
+      return { ...state, data: action.payload };
     case FETCH_DATA_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, error: action.payload };
     default:
       return state;
   }
 };
 
 export default productReducer;
-
