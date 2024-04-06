@@ -12,7 +12,7 @@ const {
   deleteReview,
 } = require("../controllers/productController");
 
-router.route("/products/").get( isAuthenticatedUser, getAllProducts);
+router.route("/products/").get(  getAllProducts); // isauth.....
 router.route("/product/:id").get(getOneProduct);
 router.route("/admin/product/new").post(isAuthenticatedUser,authorizedRoles("admin"),createProduct);
 router.route("/admin/product/:id").put(isAuthenticatedUser,authorizedRoles("admin"),updateProduct);

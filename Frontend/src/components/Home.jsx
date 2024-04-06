@@ -1,23 +1,23 @@
 import { Box, Divider, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Product from "./Product";
 import Metadata from "./Metadata";
-
-const product = {
-  images: [
-    {
-      url: "https://media.istockphoto.com/id/1224545469/photo/close-up-green-sport-pants-sweatpants-jogging-for-men-isolated-on-white-background.jpg?s=1024x1024&w=is&k=20&c=pIBNwe8r3aeRDL5mcgGojtGRqYCYh9xzFeMvV9jaB3I=",
-    },
-  ],
-  name: "Pant Jeans",
-  price: "$3000",
-  _id: "hanxla",
-};
+import { getAllProduct } from "../actions/productAction";
+import { useSelector, useDispatch } from "react-redux";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { loading, error, products, productsCount } = useSelector(
+    (state) => state.products
+  );
+  console.log(products); // Log the products
+  useEffect(() => {
+    dispatch(getAllProduct());
+  }, [dispatch]);
+
   return (
     <>
-    <Metadata title = "HOME PAGE"/>
+      <Metadata title="HOME PAGE" />
       <Box
         m={2}
         display="flex"
@@ -25,14 +25,18 @@ const Home = () => {
         flexDirection="column"
         alignItems="center"
       >
-        <Typography textAlign="center" variant="h5" fontWeight="600" margin={4}>
+        <Typography
+          textAlign="center"
+          variant="h5"
+          fontWeight="600"
+          margin={4}
+          borderBottom={2}
+          color={"#fff"}
+        >
           Featured Products
         </Typography>
-        <Box display={"flex"}    justifyContent={"space-around"}>
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
-          
+        <Box display={"flex"} justifyContent={"space-around"}>
+          {products && products.map((product) => <Product product={product} />)}
         </Box>
       </Box>
     </>

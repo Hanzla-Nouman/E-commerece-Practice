@@ -20,7 +20,7 @@ export default function Product({ product }) {
     <Box m={3}  >
       <Card sx={{ maxWidth: 345 }}  >
         <Box p={2} >
-        <Link href={"http://facebook.com"} underline="none" color="inherit">
+        <Link href={"#"} underline="none" color="inherit"  >
           <CardActionArea >
             {product.images &&
               product.images.length > 0 && (

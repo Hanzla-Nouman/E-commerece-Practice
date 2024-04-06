@@ -18,7 +18,7 @@ const Footer = () => {
           </Typography>
           <Grid container spacing={1} minHeight={100}>
             <Grid
-              lg="4"
+              
               display="flex"
               justifyContent="center"
               alignItems="center"
@@ -46,7 +46,7 @@ const Footer = () => {
               </Typography>
             </Grid>
             <Grid
-              lg="4"
+              // lg="4"
               display="flex"
               justifyContent="center"
               alignItems="center"
@@ -74,7 +74,7 @@ const Footer = () => {
               </Typography>
             </Grid>
             <Grid
-              lg="4"
+              // lg="4"
               display="flex"
               justifyContent="center"
               alignItems="center"
