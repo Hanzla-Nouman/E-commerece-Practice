@@ -4,7 +4,8 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 const ApiFeatures = require("../utils/apifeatures");
 
 // Get all products
-exports.getAllProducts = catchAsyncError(async (req, res) => {
+exports.getAllProducts = catchAsyncError(async (req, res,next) => {
+  // return next(new ErrorHandler("Product Not Found", 500));
   const resultperpage = 10;
   const totalProducts = await Product.countDocuments();
   const apifeature = new ApiFeatures(Product.find(), req.query)
