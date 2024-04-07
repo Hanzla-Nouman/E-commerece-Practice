@@ -6,7 +6,7 @@ import {
   FETCH_DATA_FAILURE,
 } from "./actionTypes";
 
-export const fetchData = () => {
+export const fetchData = () => {  
   return async (dispatch) => {
     dispatch({ type: FETCH_DATA_REQUEST });
     try {

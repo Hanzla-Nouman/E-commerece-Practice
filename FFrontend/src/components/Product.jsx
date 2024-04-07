@@ -1,14 +1,14 @@
 import React from "react";
-import ReactStars from "react-rating-stars-component"
+import ReactStars from "react-rating-stars-component";
 
 const Product = ({ product }) => {
   const options = {
     edit: false,
     value: product.rating,
-    activeColor:"tomato",
-    color:"#7c7d7d",
-    size: window.innerWidth  < 600 ? 20 : 25,
-    isHalf: true
+    activeColor: "tomato",
+    color: "#7c7d7d",
+    size: window.innerWidth < 600 ? 20 : 25,
+    isHalf: true,
   };
   return (
     <div
@@ -24,8 +24,8 @@ const Product = ({ product }) => {
       <div className="card-body">
         <h1 className="card-title">{product.name}</h1>
         <span className="text-slate-400  ">Rs.{product.price}</span>
-        <ReactStars {...options}/>
-          <span>(256 reviews)</span>
+        <ReactStars {...options} />
+        <span>{product.reviews.length} reviews</span>
         <div className="card-actions justify-end">
           <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-primary">
             Add to Cart

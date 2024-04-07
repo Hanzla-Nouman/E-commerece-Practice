@@ -2,19 +2,23 @@ import React, { useEffect } from "react";
 import Product from "./Product";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../store/actions";
+import Loader from "./Loader";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.productReducer); // Destructure `data` from the state
+  const { data,loading } = useSelector((state) => state.productReducer); // Destructure `data` from the state
   const { products, productsCount } = data; // Destructure `products` and `productsCount` from `data`
   console.log(products);
 
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
-
+ console.log(loading)
   return (
-    <div style={{ textAlign: "center", marginTop: "30px" }}>
+
+    <>
+  { loading ? (<Loader/> ):
+  ( <div style={{ textAlign: "center", marginTop: "30px" }}>
       <h1 className="text-3xl font-bold">Featured Products</h1>
 
       <div
@@ -39,8 +43,9 @@ const Home = () => {
           </div>
         ))}
       </div>
-    </div>
-  );
+    </div>)}
+  
+  </>)
 };
 
 export default Home;

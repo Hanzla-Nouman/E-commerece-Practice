@@ -6,7 +6,6 @@ const rootReducer = combineReducers({
     productReducer: productReducer
   });
 
-
 const store = createStore(rootReducer,applyMiddleware(thunk));
 
 export default store
