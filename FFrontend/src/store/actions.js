@@ -21,12 +21,12 @@ export const fetchProduct = () => {
   };
 };
 
-export const fetchProductDetails = () => {  
+export const fetchProductDetails = (id) => {  
   return async (dispatch) => {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
     try {
-      const data = await axios.get(`http://localhost:4000/api/v1/products/${id}`);
-      dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data.product });
+      const response = await axios.get(`http://localhost:4000/api/v1/product/${id}`);
+      dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: response.data });
     } catch (error) {
       dispatch({ type: PRODUCT_DETAILS_FAILURE, payload: error.message });
     }
