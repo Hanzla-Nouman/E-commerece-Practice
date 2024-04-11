@@ -17,7 +17,7 @@ const Home = () => {
       return alert.show(error);
     }
     dispatch(fetchProduct());
-  }, [dispatch,alert]);
+  }, [dispatch, alert]);
 
   return (
     <>
@@ -35,7 +35,7 @@ const Home = () => {
               margin: "0  5px",
             }}
           >
-            {products.map((product) => (
+            {products && products.map((product) => (
               <div
                 key={product._id}
                 style={{

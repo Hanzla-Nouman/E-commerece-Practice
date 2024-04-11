@@ -11,9 +11,9 @@ import {
 
 const productReducer = (state = { products: [] }, action) => {
   switch (action.type) {
-    case ALL_PRODUCT_REQUEST:
-      return {
-        loading: true,
+    case ALL_PRODUCT_REQUEST: 
+      return { 
+        loading: true,  
         products: [],
       };
     case ALL_PRODUCT_SUCCESS:

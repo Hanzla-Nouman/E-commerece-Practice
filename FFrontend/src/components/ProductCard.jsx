@@ -12,38 +12,33 @@ const Product = ({ product }) => {
     isHalf: true,
   };
   return (
-    
     <div
-    className="card card-compact w-96  bg-base-100 shadow-xl "
-    style={{ margin: "30px 0px", width: "280px", borderRadius: "3px" }}
+      className="card card-compact w-96  bg-base-100 shadow-xl "
+      style={{ margin: "30px 0px", width: "280px", borderRadius: "3px" }}
     >
       <Link to={`/product/${product._id}`}>
-      <div className="bg-base-200">
-      <figure>
-        <img
-          src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-          alt="Shoes"
-          />
-      </figure>
-      <div className="card-body">
-        <h1 className="card-title">{product.name}</h1>
-        <span className="text-slate-400  ">Rs.{product.price}</span>
-        <ReactStars {...options} />
-        <span>{product.reviews.length} reviews</span>
+        <div className="bg-base-200">
+          <figure>
+            <img
+              src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+              alt="Shoes"
+            />
+          </figure>
+          <div className="card-body">
+            <h1 className="card-title">{product.name}</h1>
+            <span className="text-slate-400  ">Rs.{product.price}</span>
+            <ReactStars {...options} />
+            <span>{product.reviews.length} reviews</span>
+          </div>
         </div>
-        </div>
-          </Link>
-        <div className="card-actions justify-end" style={{margin:"15px 10px"}}>
-          <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-md btn-primary">
-            Add to Cart
-          </button>
-        </div>
+      </Link>
+      <div className="card-actions justify-end bg-base-400" style={{ margin: "12px 10px" }}>
+        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-md btn-primary">
+          Add to Cart
+        </button>
       </div>
-   
-
-     
-    
+    </div>
   );
-}
+};
 
 export default Product;
