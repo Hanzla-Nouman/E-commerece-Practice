@@ -1,3 +1,5 @@
+
+
 import React, { useRef, useState } from "react";
 import { useInputState } from "../context/inputContext";
 
@@ -6,26 +8,24 @@ const Search = () => {
   const [inputValue, setInputValue] = useState("");
   const { setResult } = useInputState();
 
-  const handleInputForm = (e) => {
-    e.preventDefault();
-    setResult(inputValue)
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    setResult(value);
   };
 
   return (
     <>
-      <form onSubmit={handleInputForm}>
+      <form>
         <div className="form-control" style={{ display: "flex" }}>
           <input
             type="text"
             placeholder="Search"
-            className="input input-bordered w-24 md:w-auto"
+            className="input input-bordered w-24 md:w-auto mr-4"
             ref={inputSearch}
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={handleInputChange}
           />
-          <button type="submit" className="btn btn-primary" disabled={!inputValue}>
-            Search
-          </button>
         </div>
       </form>
     </>
@@ -33,3 +33,4 @@ const Search = () => {
 };
 
 export default Search;
+
