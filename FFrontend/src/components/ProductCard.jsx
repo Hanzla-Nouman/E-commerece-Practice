@@ -14,7 +14,7 @@ const Product = ({ product }) => {
   return (
     <div
       className="card card-compact w-96  bg-base-100 shadow-xl "
-      style={{ margin: "30px 0px", width: "280px", borderRadius: "3px" }}
+      style={{ margin: "30px 0px", width: "280px", borderRadius: "3px"  }}
     >
       <Link to={`/product/${product._id}`}>
         <div className="bg-base-200">

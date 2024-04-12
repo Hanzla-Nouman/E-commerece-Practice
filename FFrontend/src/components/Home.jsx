@@ -6,6 +6,7 @@ import Loader from "./Loader";
 import { useAlert } from "react-alert";
 import Pagination from "react-js-pagination";
 import { useInputState } from "../context/inputContext";
+import Sidebar from "./Sidebar";
 
 const Home = () => {
   const alert = useAlert();
@@ -40,8 +41,9 @@ const Home = () => {
         <Loader />
       ) : (
         <div style={{ textAlign: "center", marginTop: "30px" }}>
+          <Sidebar/>
           <h1 className="text-3xl font-bold">Featured Products</h1>
-
+         
           <div
             style={{
               display: "flex",
@@ -74,7 +76,7 @@ const Home = () => {
             )}
           </div>
           
-          {totalProducts !== undefined && (
+          {resultperpage < totalProducts && (
             <div className="paginationBox">
             <Pagination
             activePage={currentPage}
