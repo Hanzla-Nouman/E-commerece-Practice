@@ -22,7 +22,7 @@ const Home = () => {
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   };
-console.log(products)
+
   const filteredProducts = result
     ? products.filter((product) => product.name.toLowerCase().includes(result))
     : products;
@@ -31,7 +31,7 @@ console.log(products)
     if (error) {
       return alert.show(error);
     }
-    dispatch(fetchProduct(currentPage));
+    dispatch(fetchProduct(currentPage,result));
   }, [dispatch, alert, result,currentPage]);
 
   return (
@@ -73,7 +73,7 @@ console.log(products)
               </h1>
             )}
           </div>
-          {console.log("totalProducts: ", totalProducts)}
+          
           {totalProducts !== undefined && (
             <div className="paginationBox">
             <Pagination

@@ -11,10 +11,11 @@ import {
 
 export const fetchProduct = (currentPage = 1,result = "") => {  
   return async (dispatch) => {
+
     try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
     let link = `http://localhost:4000/api/v1/products?&page=${currentPage}&keyword=${result}`
- 
+   
       const response = await axios.get(link);
       dispatch({ type: ALL_PRODUCT_SUCCESS, payload: response.data });
     } catch (error) {

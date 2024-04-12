@@ -20,7 +20,7 @@ const productReducer = (
         products: [],
       };
     case ALL_PRODUCT_SUCCESS:
-      console.log(action.payload.products.length, "action");
+      
       return {
         loading: false,
         products: action.payload.products,

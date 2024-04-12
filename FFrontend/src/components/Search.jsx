@@ -2,11 +2,15 @@
 
 import React, { useRef, useState } from "react";
 import { useInputState } from "../context/inputContext";
+import {useDispatch }from'react-redux'
+import { fetchProduct } from "../store/actions";
+
 
 const Search = () => {
   const inputSearch = useRef(null);
   const [inputValue, setInputValue] = useState("");
   const { setResult } = useInputState();
+  const dispatch = useDispatch()
 
   const handleInputChange = (e) => {
     const value = e.target.value;
