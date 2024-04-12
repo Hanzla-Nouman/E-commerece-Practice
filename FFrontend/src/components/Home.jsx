@@ -1,23 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Product from "./ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../store/actions";
 import Loader from "./Loader";
 import { useAlert } from "react-alert";
+import Pagination from "react-js-pagination";
+import { useInputState } from "../context/inputContext";
 
 const Home = () => {
   const alert = useAlert();
+  const [currentPage, setCurrentPage] = useState(1);
+
   const dispatch = useDispatch();
-  const { products, loading, error } = useSelector(
-    (state) => state.productReducer
-  );
+  let { result } = useInputState();
+  result = result.toLowerCase();
+  const { loading, products, error, resultperpage,totalProducts } =
+    useSelector((state) => state.productReducer);
+
+  
+
+  const setCurrentPageNo = (e) => {
+    setCurrentPage(e);
+  };
+console.log(products)
+  const filteredProducts = result
+    ? products.filter((product) => product.name.toLowerCase().includes(result))
+    : products;
 
   useEffect(() => {
     if (error) {
       return alert.show(error);
     }
-    dispatch(fetchProduct());
-  }, [dispatch, alert]);
+    dispatch(fetchProduct(currentPage));
+  }, [dispatch, alert, result,currentPage]);
 
   return (
     <>
@@ -35,20 +50,48 @@ const Home = () => {
               margin: "0  5px",
             }}
           >
-            {products && products.map((product) => (
-              <div
-                key={product._id}
-                style={{
-                  flex: "0 0 25%",
-                  maxWidth: "22%",
-                  padding: "0 15px",
-                  boxSizing: "border-box",
-                }}
+            {filteredProducts.length > 0 ? (
+              filteredProducts.map((product) => (
+                <div
+                  key={product._id}
+                  style={{
+                    flex: "0 0 25%",
+                    maxWidth: "22%",
+                    padding: "0 15px",
+                    boxSizing: "border-box",
+                  }}
+                >
+                  <Product product={product} />
+                </div>
+              ))
+            ) : (
+              <h1
+                className="text-3xl font-bold"
+                style={{ margin: "200px 0px", fontStyle: "italic" }}
               >
-                <Product product={product} />
-              </div>
-            ))}
+                No Products for "{result}"
+              </h1>
+            )}
           </div>
+          {console.log("totalProducts: ", totalProducts)}
+          {totalProducts !== undefined && (
+            <div className="paginationBox">
+            <Pagination
+            activePage={currentPage}
+            itemsCountPerPage={resultperpage}
+            totalItemsCount={totalProducts}
+            onChange={setCurrentPageNo}
+            nextPageText="Next"
+            prevPageText="Prev"
+            firstPageText="1st"
+            lastPageText="Last"
+            itemClass="page-item"
+            linkClass="page-link"
+            activeClass="pageItemActive"
+            activeLinkClass="pageLinkActive"
+          />
+          </div>
+          )}
         </div>
       )}
     </>

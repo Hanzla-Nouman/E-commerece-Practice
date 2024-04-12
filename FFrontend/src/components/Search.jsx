@@ -12,6 +12,8 @@ const Search = () => {
     const value = e.target.value;
     setInputValue(value);
     setResult(value);
+     // Fetch products with the updated result value
+     dispatch(fetchProduct(1, value.toLowerCase()));
   };
 
   return (

@@ -9,11 +9,13 @@ import {
   PRODUCT_DETAILS_FAILURE,
 } from "./actionTypes";
 
-export const fetchProduct = () => {  
+export const fetchProduct = (currentPage = 1,result = "") => {  
   return async (dispatch) => {
-    dispatch({ type: ALL_PRODUCT_REQUEST });
     try {
-      const response = await axios.get("http://localhost:4000/api/v1/products");
+    dispatch({ type: ALL_PRODUCT_REQUEST });
+    let link = `http://localhost:4000/api/v1/products?&page=${currentPage}&keyword=${result}`
+ 
+      const response = await axios.get(link);
       dispatch({ type: ALL_PRODUCT_SUCCESS, payload: response.data });
     } catch (error) {
       dispatch({ type: ALL_PRODUCT_FAILURE, payload: error.message });

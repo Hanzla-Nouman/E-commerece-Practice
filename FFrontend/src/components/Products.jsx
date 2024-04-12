@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Product from "./ProductCard";
 import { fetchProduct } from "../store/actions";
@@ -11,9 +11,10 @@ const Products = () => {
   result = result.toLowerCase()
   const { products, loading } = useSelector((state) => state.productReducer);
 
+
+
   useEffect(() => {
     dispatch(fetchProduct());
-    
   }, [dispatch, result]);
 
   const filteredProducts = result
