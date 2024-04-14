@@ -20,12 +20,13 @@ const productReducer = (
         products: [],
       };
     case ALL_PRODUCT_SUCCESS:
-      
+
       return {
         loading: false,
         products: action.payload.products,
         resultperpage: action.payload.resultperpage,
         totalProducts: action.payload.totalProducts,
+        filteredProductsCount: action.payload.filteredProductsCount,  
       };
     case ALL_PRODUCT_FAILURE:
       return {

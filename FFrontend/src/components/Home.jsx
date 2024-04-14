@@ -11,22 +11,61 @@ import Sidebar from "./Sidebar";
 const Home = () => {
   const alert = useAlert();
   const [currentPage, setCurrentPage] = useState(1);
+  const [minValue, setMinValue] = useState("");
+  const [maxValue, setMaxValue] = useState("");
+  const [category, setCategory] = useState("");
+  const [ratings, setRatings] = useState(0)
 
+  const options = {
+    edit: false,
+    value: 1,
+    color: "#7c7d7d",
+    size: window.innerWidth < 600 ? 20 : 25,
+    
+  };
+
+  const categories = [
+    "Electronics",
+    "Mechanics",
+    "Decoration",
+    "Home",
+    "Decor",
+  ];
   const dispatch = useDispatch();
   let { result } = useInputState();
   result = result.toLowerCase();
-  const { loading, products, error, resultperpage,totalProducts } =
+  const { loading, products, error, resultperpage,totalProducts,filteredProductsCount } =
     useSelector((state) => state.productReducer);
 
   
+  
+    const handleMinChange = (e) => {
+      const value = e.target.value;
+      setMinValue(value);
+    };
+  
+    const handleMaxChange = (e) => {
+      const value = e.target.value;
+      setMaxValue(value);
+    };
 
+    const handleCategory=(e)=>{
+      setCategory(e.target.textContent.toLowerCase()) 
+    
+    }
+ 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
+  };
+
+  const handleApply = () => {
+    dispatch(fetchProduct(currentPage, result, minValue, maxValue,category,ratings));
   };
 
   const filteredProducts = result
     ? products.filter((product) => product.name.toLowerCase().includes(result))
     : products;
+ 
 
   useEffect(() => {
     if (error) {
@@ -35,14 +74,26 @@ const Home = () => {
     dispatch(fetchProduct(currentPage,result));
   }, [dispatch, alert, result,currentPage]);
 
+    
+
   return (
     <>
       {loading ? (
         <Loader />
       ) : (
         <div style={{ textAlign: "center", marginTop: "30px" }}>
-          <Sidebar/>
+          <Sidebar   minValue={minValue}
+            maxValue={maxValue}
+            handleMinChange={handleMinChange}
+            handleMaxChange={handleMaxChange}
+            handleApply={handleApply}
+            handleCategory={handleCategory}
+            categories={categories}
+            category={category}
+            options={options}
+            setRatings={setRatings}/>
           <h1 className="text-3xl font-bold">Featured Products</h1>
+          
          
           <div
             style={{
