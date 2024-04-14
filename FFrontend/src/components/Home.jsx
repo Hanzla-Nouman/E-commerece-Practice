@@ -7,6 +7,7 @@ import { useAlert } from "react-alert";
 import Pagination from "react-js-pagination";
 import { useInputState } from "../context/inputContext";
 import Sidebar from "./Sidebar";
+import Signup from "./Login";
 
 const Home = () => {
   const alert = useAlert();
@@ -92,6 +93,7 @@ const Home = () => {
             category={category}
             options={options}
             setRatings={setRatings}/>
+            
           <h1 className="text-3xl font-bold">Featured Products</h1>
           
          
