@@ -7,7 +7,7 @@
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAILURE,
-  } from "./actionTypes";    
+  } from "./actionTypes";     
 
   export const fetchProduct = (currentPage = 1,result = "",minPrice = 0,maxPrice = 300,category,ratings = 0) => {  
     return async (dispatch) => {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom"; // Import useParams hook
-import { fetchProductDetails } from "../store/actions";
+import { fetchProductDetails } from "../store/productActions";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import Navbar from "./Navbar";

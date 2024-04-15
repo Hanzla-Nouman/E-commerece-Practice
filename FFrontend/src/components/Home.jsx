@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "./ProductCard";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "../store/actions";
+import { fetchProduct } from "../store/productActions";
 import Loader from "./Loader";
 import { useAlert } from "react-alert";
 import Pagination from "react-js-pagination";

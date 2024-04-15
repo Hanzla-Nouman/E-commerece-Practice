@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import { useInputState } from "../context/inputContext";
 import {useDispatch }from'react-redux'
-import { fetchProduct } from "../store/actions";
+import { fetchProduct } from "../store/productActions";
 
 
 const Search = () => {
