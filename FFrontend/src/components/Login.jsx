@@ -6,23 +6,31 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.userReducer
   );
+  console.log("hi")
+  console.log(isAuthenticated,"at login")
   const dispatch = useDispatch();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(loginEmail, loginPassword));
+    dispatch(login(loginEmail, loginPassword)) .then(() => {
+      // Save isAuthenticated to local storage
+      localStorage.setItem('isAuthenticated', 'true');
+    });;
   };
   useEffect(() => {
-    if (isAuthenticated === true) {
+    const storedIsAuthenticated = localStorage.getItem('isAuthenticated');
+    if (storedIsAuthenticated === true) {
       navigate("/account");
+    }else if(storedIsAuthenticated === undefined) {
+      navigate("/login")
     }
-  }, [isAuthenticated]);
+  }, [navigate]);
   return (
     <>
       {loading ? (

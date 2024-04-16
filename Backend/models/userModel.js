@@ -24,13 +24,16 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
   avatar: {
+
     public_id: {
       type: String,
-      required: true,
+      required: false,
+      default:"https://github.com/meabhisingh/mernProjectEcommerce/blob/master/frontend/src/images/Profile.png?raw=true"
     },
     url: {
       type: String,
-      required: true,
+      required: false,
+      default:"https://github.com/meabhisingh/mernProjectEcommerce/blob/master/frontend/src/images/Profile.png?raw=true"
     },
   },
   role: {

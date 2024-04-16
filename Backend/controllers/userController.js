@@ -4,19 +4,62 @@ const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const cloudinary = require ('cloudinary');
+ 
+// Register a User 
+// exports.registerUser = catchAsyncError(async (req, res, next) => {
 
-// Register a User
+//   try {
+//     const myCloud = await cloudinary.uploader.upload(req.body.avatar, {
+//       folder: "avatars",
+//       width: 150,
+//       crop: "scale",
+//     });
+//   } catch (error) {
+//     return next(new ErrorHandler("Avatar upload failed", 500));
+//   }
+
+//   const { name, email, password } = req.body; 
+
+//   const user = await User.create({
+//     name,
+//     email,
+//     password,
+//     avatar: {
+//       public_id: myCloud.public_id,
+//       url: myCloud.secure_url,
+//     },
+//   });
+//   const token = user.getJWTToken();
+
+//   res.status(201).json({
+//     success: true,
+//     token,
+//   });
+// });
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  // let myCloud;
+  // try {
+  //   const result = await cloudinary.uploader.upload(req.file.path, {
+  //     folder: "avatars",
+  //     width: 150,
+  //     crop: "scale",
+  //   });
+  //   myCloud = result;
+  // } catch (error) {
+  //   return next(new ErrorHandler("Avatar upload failed", 500));
+  // }
+
+  const { name, email, password } = req.body; 
 
   const user = await User.create({
     name,
     email,
     password,
-    avatar: {
-      public_id: "this is a sample id",
-      url: "profilepic",
-    },
+    // avatar: {
+    //   public_id: myCloud.public_id,
+    //   url: myCloud.secure_url,
+    // },
   });
   const token = user.getJWTToken();
 
@@ -25,6 +68,7 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
     token,
   });
 });
+
 
 // Login a User
 exports.loginUser = catchAsyncError(async (req, res, next) => {
@@ -48,7 +92,7 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
 
-  sendToken(user, 200, res);
+  sendToken(user, 200, res,{ avatar: user.avatar });
 });
 
 // Logout a User

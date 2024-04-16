@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Search from './Search'
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+  const { isAuthenticated } = useSelector(
+    (state) => state.userReducer
+  );
   return (
     <>
     <div className="navbar bg-base-300">
@@ -21,7 +25,7 @@ const Navbar = () => {
     </ul>
   </div>
   </div>
-  
+  {console.log(isAuthenticated)}
   <div className="flex-none">
     <Search/>
     <div className="dropdown dropdown-end">
@@ -42,19 +46,18 @@ const Navbar = () => {
         </div>
       </div>
     </div>
-    <div className="dropdown dropdown-end">
+   {isAuthenticated? ( <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img alt="Tailwind CSS Navbar component" src="https://github.com/meabhisingh/mernProjectEcommerce/blob/master/frontend/src/images/Profile.png?raw=true" />
+        <div className="w-12 rounded-full" style={{background:"#fff",alignItems:"center",display:"flex",justifyContent:"center"}}>
+          <h1 className='text-3xl'>H</h1>
         </div>
       </div>
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-24">
-        <li><Link to={"/login"}> LogIn</Link></li>
-        <li><Link to={"/signup"}> Signup</Link></li>
         
+        <li><Link to={"/signup"}> Signup</Link></li>
         <li><a>Logout</a></li>
       </ul>
-    </div>
+    </div>) : (<Link to={"/login"}><button className='btn btn-primary'> LogIn</button></Link>)}
   </div>
 </div>
     </>

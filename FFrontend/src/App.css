@@ -70,3 +70,20 @@ font-weight: 500;
 cursor: pointer;
 color: black;
 }
+/* Hide default file input */
+input[type="file"] {
+  display: none;
+}
+
+/* Style custom file input */
+.custom-file-input {
+  display: inline-block;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  color: #333;
+  font-weight: 500;
+  font-size: 13px;
+}
