@@ -25,30 +25,31 @@ const Signup = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   }
 
-  const registerAvatarChange = (e) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setAvatarPreview(reader.result);
-        setAvatar(reader.result);
-      }};
-    reader.readAsDataURL(e.target.files[0])};
+  // const registerAvatarChange = (e) => {
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     if (reader.readyState === 2) {
+  //       setAvatarPreview(reader.result);
+  //       setAvatar(reader.result);
+  //     }};
+  //   reader.readAsDataURL(e.target.files[0])};
 
    
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
-   
-
     const myForm = new FormData();
-
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("password", password);
     // myForm.set("avatar", avatar);
     console.log(name,email,password)
     dispatch(signup(myForm,navigate));
-  
+    setUser({name: "",
+    email: "",
+    password: "",})
+      
+
   };
   return (
     <>
@@ -73,13 +74,13 @@ const Signup = () => {
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6" onSubmit={handleSignupSubmit}>
-              <div className=" grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              
                 <div className="sm:col-span-3">
                   <label
                     htmlFor="first-name"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    First name
+                    Full Name
                   </label>
                   <div className="mt-2">
                     <input
@@ -88,31 +89,13 @@ const Signup = () => {
                       id="name"
                       value={name}
                       autoComplete="given-name"
-                      placeholder="John"
+                      placeholder="John Doe"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={registerDataChange}
                     />
                   </div>
                 </div>
 
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="last-name"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Last name
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="text"
-                      name="last-name"
-                      id="last-name"
-                      autoComplete="family-name"
-                      placeholder="Doe"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" onChange={registerDataChange}
-                    />
-                  </div>
-                </div>
-              </div>
+             
               <div>
                 <label
                   htmlFor="email"

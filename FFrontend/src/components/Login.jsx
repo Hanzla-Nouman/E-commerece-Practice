@@ -19,9 +19,8 @@ const Login = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(login(loginEmail, loginPassword));
-      localStorage.setItem("isAuthenticated", "true");
-      navigate("/account");
+      await dispatch(login(loginEmail, loginPassword,navigate));
+      
     } catch (error) {
       console.error("Login failed:", error);
     }
