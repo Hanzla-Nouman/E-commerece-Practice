@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router";
 import { LOGIN_SUCCESS,LOGIN_REQUEST,LOGIN_FAILURE,CLEAR_ERRORS, SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE } from "./actionTypes";
 import axios from "axios";
 
 export const login=(email,password)=> async(dispatch)=>{
+    
 try {
     dispatch({type:LOGIN_REQUEST});
     const config = {headers:{"Content-Type":"application/json"}}
@@ -13,7 +15,8 @@ try {
 }
 }
 
-export const signup=(userData)=> async(dispatch)=>{
+export const signup=(userData,navigate)=> async(dispatch)=>{
+    
 try {
     console.log(userData.email)
     // console.log(userData.avatar)
@@ -23,7 +26,8 @@ try {
     const config = {headers:{"Content-Type":"multipart/form-data"}}
     const data= await axios.post('http://localhost:4000/api/v2/register',userData,config);
     console.log("successed")
-
+    navigate("/account")
+    localStorage.setItem("isAuthenticated", "true")
     dispatch({type: SIGNUP_SUCCESS, payload:data.user})
 } catch (error) {
     console.log("error: " + error)
