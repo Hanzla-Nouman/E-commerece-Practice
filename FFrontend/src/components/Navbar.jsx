@@ -1,12 +1,19 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Search from './Search'
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {
-  const { isAuthenticated } = useSelector(
-    (state) => state.userReducer
-  );
+  const navigate = useNavigate()
+  const storedIsAuthenticated = localStorage.getItem('isAuthenticated');
+
+  const logout=()=>{
+   localStorage.removeItem("isAuthenticated")
+   navigate("/")
+  }
+  // useEffect(()=>{
+
+  // },[storedIsAuthenticated,logout]);
   return (
     <>
     <div className="navbar bg-base-300">
@@ -25,7 +32,7 @@ const Navbar = () => {
     </ul>
   </div>
   </div>
-  {console.log(isAuthenticated)}
+  {console.log(storedIsAuthenticated)}
   <div className="flex-none">
     <Search/>
     <div className="dropdown dropdown-end">
@@ -46,18 +53,18 @@ const Navbar = () => {
         </div>
       </div>
     </div>
-   {isAuthenticated? ( <div className="dropdown dropdown-end">
+   {storedIsAuthenticated? ( <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-12 rounded-full" style={{background:"#fff",alignItems:"center",display:"flex",justifyContent:"center"}}>
           <h1 className='text-3xl'>H</h1>
         </div>
       </div>
-      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-24">
+      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-slate-200 rounded-box w-24">
         
-        <li><Link to={"/signup"}> Signup</Link></li>
-        <li><a>Logout</a></li>
+         
+        <li onClick={logout}><a>Logout</a></li>
       </ul>
-    </div>) : (<Link to={"/login"}><button className='btn btn-primary'> LogIn</button></Link>)}
+    </div>) : (<><Link to={"/signup"}><button className='btn btn-primary mr-2 ml-2'> Signup</button></Link><Link to={"/login"}><button className='btn btn-primary'> LogIn</button></Link></>)}
   </div>
 </div>
     </>

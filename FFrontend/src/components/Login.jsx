@@ -6,29 +6,33 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  
+
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.userReducer
   );
-  console.log("hi")
-  console.log(isAuthenticated,"at login")
+  console.log("hi");
+  console.log(isAuthenticated, "at login");
   const dispatch = useDispatch();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login(loginEmail, loginPassword)) .then(() => {
-      // Save isAuthenticated to local storage
-      localStorage.setItem('isAuthenticated', 'true');
-    });;
-  };
-  useEffect(() => {
-    const storedIsAuthenticated = localStorage.getItem('isAuthenticated');
-    if (storedIsAuthenticated === true) {
+    try {
+      await dispatch(login(loginEmail, loginPassword));
+      localStorage.setItem("isAuthenticated", "true");
       navigate("/account");
-    }else if(storedIsAuthenticated === undefined) {
-      navigate("/login")
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
+
+  useEffect(() => {
+    const storedIsAuthenticated = localStorage.getItem("isAuthenticated");
+    if (storedIsAuthenticated) {
+      navigate("/account");
+    } else if (storedIsAuthenticated === undefined) {
+      navigate("/login");
     }
   }, [navigate]);
   return (

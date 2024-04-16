@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { signup } from "../store/userActions";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 const Signup = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [avatar, setAvatar] = useState(
     "https://github.com/meabhisingh/mernProjectEcommerce/blob/master/frontend/src/images/Profile.png?raw=true"
   );
@@ -46,6 +48,8 @@ const Signup = () => {
     // myForm.set("avatar", avatar);
     console.log(name,email,password)
     dispatch(signup(myForm));
+    navigate("/account")
+    localStorage.setItem("isAuthenticated", "true")
   };
   return (
     <>
@@ -157,7 +161,7 @@ const Signup = () => {
                
                 <div className="mt-2">
                   
-                  <div className="col-span-full">
+                  {/* <div className="col-span-full">
                     <label
                       htmlFor="photo"
                       className="block text-sm font-medium leading-6 text-gray-900"
@@ -181,7 +185,7 @@ const Signup = () => {
                         onChange={registerAvatarChange}
                       />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div>

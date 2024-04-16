@@ -8,6 +8,7 @@ import ProductDetails from "./components/ProductDetails";
 import { InputStateProvider } from "./context/inputContext";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Account from "./components/Account";
 function App() {
   return (
     <div>
@@ -18,7 +19,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/account" element={<Navbar />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
       <Footer />
       </InputStateProvider>
