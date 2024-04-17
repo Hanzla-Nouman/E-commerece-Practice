@@ -10,8 +10,8 @@ const Login = () => {
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.userReducer
   );
-  console.log("hi");
-  console.log(isAuthenticated, "at login");
+
+  
   const dispatch = useDispatch();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
