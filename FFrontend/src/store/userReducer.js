@@ -1,7 +1,7 @@
-import { CLEAR_ERRORS, LOGIN_FAILURE,LOGIN_REQUEST,LOGIN_SUCCESS,SIGNUP_FAILURE,SIGNUP_SUCCESS,SIGNUP_REQUEST, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE } from "./actionTypes"
+import { CLEAR_ERRORS, LOGIN_FAILURE,LOGIN_REQUEST,LOGIN_SUCCESS,SIGNUP_FAILURE,SIGNUP_SUCCESS,SIGNUP_REQUEST, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOGOUT_SUCCESS, LOGOUT_FAILURE } from "./actionTypes"
 
 export const userReducer = (
-    state = { user: null},
+    state = { user: {}},
     action
   ) => {
     
@@ -47,6 +47,19 @@ export const userReducer = (
                 user:null,
                 error: action.payload
             }
+            case LOGOUT_SUCCESS:
+                return{
+                    loading:false,
+                    user: {},
+                    isAuthenticated: false,
+                    error:null
+                }
+            case LOGOUT_FAILURE:
+                return{
+                    ...state,
+                    loading:false,
+                    error: action.payload
+                }
         case CLEAR_ERRORS:
             return{
                 ...state,

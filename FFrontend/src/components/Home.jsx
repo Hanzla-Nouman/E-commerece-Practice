@@ -8,8 +8,14 @@ import Pagination from "react-js-pagination";
 import { useInputState } from "../context/inputContext";
 import Sidebar from "./Sidebar";
 import Signup from "./Login";
+import { logout } from '../store/userActions';
+import { useNavigate } from "react-router";
+
 
 const Home = () => {
+  
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const alert = useAlert();
   const [currentPage, setCurrentPage] = useState(1);
   const [minValue, setMinValue] = useState("");
@@ -32,7 +38,7 @@ const Home = () => {
     "Home",
     "Decor",
   ];
-  const dispatch = useDispatch();
+ 
   let { result } = useInputState();
   result = result.toLowerCase();
   const { loading, products, error, resultperpage,totalProducts,filteredProductsCount } =
@@ -75,6 +81,10 @@ const Home = () => {
     dispatch(fetchProduct(currentPage,result));
   }, [dispatch, alert, result,currentPage]);
 
+  
+  
+  
+  
     
 
   return (
@@ -83,6 +93,7 @@ const Home = () => {
         <Loader />
       ) : (
         <div style={{ textAlign: "center", marginTop: "30px" }}>
+          
           <Sidebar   minValue={minValue}
             maxValue={maxValue}
             handleMinChange={handleMinChange}

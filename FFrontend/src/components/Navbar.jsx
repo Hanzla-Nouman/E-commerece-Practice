@@ -2,36 +2,22 @@ import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Search from './Search'
 import { useSelector } from 'react-redux';
-import store from '../store';
-import { loadUser } from '../store/userActions';
+import { logout } from '../store/userActions';
 import { useDispatch } from 'react-redux';
-const Navbar = () => {
+const Navbar = () => {  
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const storedIsAuthenticated = localStorage.getItem('isAuthenticated');
+
 
   let {userRole,isAuthenticated} = useSelector(state => state.userReducer)
-   
-   
-  //  useEffect(() => {
-  
-  //    dispatch(loadUser())
-   
-    
-  //  }, [])
-   
-   
-  
-
     console.log("user", userRole,isAuthenticated);
+      const logoutUser=()=>{
+        console.log("hiiiiiiiiiiii")
+       dispatch(logout())
+       navigate("/")
+      }
+    
 
-  const logout=()=>{
-   
-   navigate("/")
-  }
-  // useEffect(()=>{
-
-  // },[storedIsAuthenticated,logout]);
   return (
     <>
     <div className="navbar bg-base-300">
@@ -80,8 +66,8 @@ const Navbar = () => {
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-slate-200 rounded-box w-24">
         
          
-        {(userRole === "admin") && <li ><a>Dashboard</a></li>}
-        <li onClick={logout}><a>Logout</a></li>
+        {(userRole === "admin") && <li><Link to={"/dashboard"} >Dashboard</Link></li>}
+        <li onClick={logoutUser}><a>Logout</a></li>
       </ul>
     </div>) : (<><Link to={"/signup"}><button className='btn btn-primary mr-2 ml-2'> Signup</button></Link><Link to={"/login"}><button className='btn btn-primary'> LogIn</button></Link></>)}
   </div>
