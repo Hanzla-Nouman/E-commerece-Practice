@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Loader from './Loader';
 
 const Account = () => {
-  return (
-   <h1 className='text-5xl font-bold m-24 text-center'>Account</h1>
-  )
-}
+  const { user, loading } = useSelector(state => state.userReducer);
 
-export default Account
+  return (
+    <div>
+      {loading ? <Loader /> : <h1 className='text-3xl font-bold m-2 text-center'>Profile</h1>}
+    </div>
+  );
+};
+
+export default Account;

@@ -8,6 +8,7 @@ try {
     dispatch({type:LOGIN_REQUEST});
     const config = {headers:{"Content-Type":"application/json"}, withCredentials: true }
     const {data}= await axios.post('http://localhost:4000/api/v2/login',{email,password},config);
+    localStorage.setItem("isAuthenticated","true")
     
     navigate("/account");
     
@@ -26,7 +27,7 @@ try {
     const data= await axios.post('http://localhost:4000/api/v2/register',userData,config);
      localStorage.setItem("isAuthenticated","true")
     navigate("/account")
-    window.location.reload();
+    // window.location.reload();
    
     dispatch({type: SIGNUP_SUCCESS, payload:data.user})
 } catch (error) {
@@ -61,7 +62,7 @@ export const loadUser = ()=> async(dispatch)=>{
         await axios.get('http://localhost:4000/api/v2/logout', {
             withCredentials: true,  // Include cookies in the request
         });
-        localStorage.setItem("isAuthenticated","false")
+        localStorage.removeItem("isAuthenticated","false")
         dispatch({type: LOGOUT_SUCCESS});
     } catch (error) {
         dispatch({type: LOGOUT_FAILURE, payload: error.response ? error.response.data.message : "Logout failed"});

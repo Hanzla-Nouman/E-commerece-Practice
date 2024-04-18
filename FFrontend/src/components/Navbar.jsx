@@ -17,15 +17,15 @@ const Navbar = () => {
 
  
 
-  let {userRole,isAuthenticated} = useSelector(state => state.userReducer)
-console.log(isAuthenticated)
+  let {userRole,isAuthenticated,loading} = useSelector(state => state.userReducer)
 
+console.log(loading)
     
 
 
   return (
     <>
-    <div className="navbar bg-base-300">
+    {!loading && (<div className="navbar bg-base-300">
   <div className="flex-1">
     <a className="btn btn-ghost text-xl">UrbanAura</a>
     <div className="navbar-center hidden lg:flex">
@@ -61,8 +61,8 @@ console.log(isAuthenticated)
           </div>
         </div>
       </div>
-    </div>
-   {isAuthenticated? ( <div className="dropdown dropdown-end">
+    </div> 
+   {(localStorage.getItem("isAuthenticated"))? ( <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-12 rounded-full" style={{background:"#fff",alignItems:"center",display:"flex",justifyContent:"center"}}>
           <h1 className='text-3xl'>H</h1>
@@ -72,11 +72,12 @@ console.log(isAuthenticated)
         
          
         {(userRole === "admin") && <li><Link to={"/dashboard"} >Dashboard</Link></li>}
+      { (isAuthenticated===true) && <li><Link to={"/account"} >Profile</Link></li>}
         <li onClick={logoutUser}><a>Logout</a></li>
       </ul>
     </div>) : (<><Link to={"/signup"}><button className='btn btn-primary mr-2 ml-2'> Signup</button></Link><Link to={"/login"}><button className='btn btn-primary'> LogIn</button></Link></>)}
   </div>
-</div>
+</div>)}
     </>
   )
 }

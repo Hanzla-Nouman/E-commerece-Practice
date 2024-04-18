@@ -11,6 +11,7 @@ import Signup from "./components/Signup";
 import Account from "./components/Account";
 import { useSelector,useDispatch } from "react-redux";
 import store from "./store";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { loadUser, logout } from "./store/userActions";
 function App() {
   
@@ -30,10 +31,10 @@ function App() {
       <InputStateProvider>
       <Navbar />
       <Routes>
+        <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Home/>} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
         <Route path="/account" element={<Account />} />
       </Routes>
       <Footer />

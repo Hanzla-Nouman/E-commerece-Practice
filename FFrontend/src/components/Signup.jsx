@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { signup } from "../store/userActions";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import Loader from './Loader'
 const Signup = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -34,6 +35,7 @@ const Signup = () => {
   //     }};
   //   reader.readAsDataURL(e.target.files[0])};
 
+  const {  loading } = useSelector(state => state.userReducer);
    
 
   const handleSignupSubmit = (e) => {
@@ -50,7 +52,7 @@ const Signup = () => {
   };
   return (
     <>
-      <div
+     {loading?(<Loader/>):( <div
         className="flex min-h-full  flex-1 flex-col justify-center px-6 py-12 lg:px-8"
         style={{ justifyContent: "center", alignItems: "center" }}
       >
@@ -178,7 +180,7 @@ const Signup = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div>)}
     </>
   );
 };
