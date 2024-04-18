@@ -9,13 +9,13 @@ const Navbar = () => {
   const navigate = useNavigate()
 
 
+  const logoutUser=()=>{
+    console.log("hiiiiiiiiiiii")
+    dispatch(logout())
+    navigate("/")
+  }
   let {userRole,isAuthenticated} = useSelector(state => state.userReducer)
     console.log("user", userRole,isAuthenticated);
-      const logoutUser=()=>{
-        console.log("hiiiiiiiiiiii")
-       dispatch(logout())
-       navigate("/")
-      }
     
 
   return (

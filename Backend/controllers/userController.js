@@ -6,107 +6,48 @@ const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require ('cloudinary');
  
-// Register a User 
-// exports.registerUser = catchAsyncError(async (req, res, next) => {
-
-//   try {
-//     const myCloud = await cloudinary.uploader.upload(req.body.avatar, {
-//       folder: "avatars",
-//       width: 150,
-//       crop: "scale",
-//     });
-//   } catch (error) {
-//     return next(new ErrorHandler("Avatar upload failed", 500));
-//   }
-
-//   const { name, email, password } = req.body; 
-
-//   const user = await User.create({
-//     name,
-//     email,
-//     password,
-//     avatar: {
-//       public_id: myCloud.public_id,
-//       url: myCloud.secure_url,
-//     },
-//   });
-//   const token = user.getJWTToken();
-
-//   res.status(201).json({
-//     success: true,
-//     token,
-//   });
-// });
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-  // let myCloud;
-  // try {
-  //   const result = await cloudinary.uploader.upload(req.file.path, {
-  //     folder: "avatars",
-  //     width: 150,
-  //     crop: "scale",
-  //   });
-  //   myCloud = result;
-  // } catch (error) {
-  //   return next(new ErrorHandler("Avatar upload failed", 500));
-  // }
-
   const { name, email, password } = req.body; 
-
   const user = await User.create({
     name,
     email,
     password,
-    // avatar: {
-    //   public_id: myCloud.public_id,
-    //   url: myCloud.secure_url,
-    // },
   });
-  const token = user.getJWTToken();
-
-  res.status(201).json({
-    success: true,
-    token,
-  });
+  sendToken(user, 201, res);
 });
 
 
 // Login a User
 exports.loginUser = catchAsyncError(async (req, res, next) => {
   const { email, password } = req.body;
-
-  // checking if user has given password and email both
-
   if (!email || !password) {
     return next(new ErrorHandler("Please Enter Email & Password", 400));
   }
-
   const user = await User.findOne({ email }).select("+password");
-
   if (!user) {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
- 
   const isPasswordMatched = await user.comparePassword(password);
-
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
-
-  sendToken(user, 200, res,);
+  sendToken(user, 200, res);
 });
 
-// Logout a User
 exports.logoutUser = catchAsyncError(async (req, res, next) => {
-  res.cookie("token", null, {
-    expires: new Date(Date.now()),
-    httpOnly: true,
-  });
+  console.log("Current token cookie:", req.cookies.token); // Log current token cookie value
 
+  res.cookie("token", "", {
+    expires: new Date(0),  // Set the expires date to a past date
+    httpOnly: true,
+    path: "/",  // Set to the root path
+  });
   res.status(200).json({
     success: true,
     message: "Logged Out",
   });
 });
+ 
 
 // Forgot Password
 

@@ -28,12 +28,16 @@ const Login = () => {
 
   useEffect(() => {
     const storedIsAuthenticated = localStorage.getItem("isAuthenticated");
-    if (storedIsAuthenticated) {
+    console.log("========================",storedIsAuthenticated)
+    if (storedIsAuthenticated === true) {
       navigate("/account");
-    } else if (storedIsAuthenticated === undefined) {
+    } 
+     else {
       navigate("/login");
-    }
-  }, [navigate]);
+
+     }
+    
+  }, []);
   return (
     <>
       {loading ? (

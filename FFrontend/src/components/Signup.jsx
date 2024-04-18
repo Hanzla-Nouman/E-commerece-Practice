@@ -48,8 +48,6 @@ const Signup = () => {
     setUser({name: "",
     email: "",
     password: "",})
-      
-
   };
   return (
     <>

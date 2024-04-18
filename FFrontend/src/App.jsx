@@ -15,9 +15,11 @@ import { loadUser, logout } from "./store/userActions";
 function App() {
   
   const {user} = useSelector(state => state.userReducer)
-  // console.log(user)
-useEffect(() => {
+  console.log(user)
+  useEffect(() => {
+
     store.dispatch(loadUser())
+  
 }, [])
 
 
@@ -25,6 +27,7 @@ useEffect(() => {
 
   return (
     <div>
+      <React.StrictMode>
       <InputStateProvider>
       <Navbar />
       <Routes>
@@ -36,6 +39,7 @@ useEffect(() => {
       </Routes>
       <Footer />
       </InputStateProvider>
+      </React.StrictMode>
     </div>
   );
 }

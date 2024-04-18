@@ -19,13 +19,11 @@ try {
 
 export const signup=(userData,navigate)=> async(dispatch)=>{
     
-try {
-   
-    // console.log(userData.avatar)
-    
+try { 
     console.log("requesting...")
     dispatch({type: SIGNUP_REQUEST});
-    const config = {headers:{"Content-Type":"multipart/form-data"}}
+    const config = {headers:{"Content-Type":"multipart/form-data"}, withCredentials: true }
+
     const data= await axios.post('http://localhost:4000/api/v2/register',userData,config);
     console.log("successed")
     navigate("/account")
@@ -38,8 +36,8 @@ try {
 }
 
 export const loadUser = ()=> async(dispatch)=>{
-    
-    try {
+
+    try {   
         dispatch({type:LOAD_USER_REQUEST});
         const config = {headers:{"Content-Type":"application/json"}, withCredentials: true }
         
@@ -54,8 +52,12 @@ export const loadUser = ()=> async(dispatch)=>{
   export const logout = () => async(dispatch)=>{
     try {
         console.log("Logging out...");
-        await axios.get('http://localhost:4000/api/v2/logout');
+        await axios.get('http://localhost:4000/api/v2/logout', {
+            withCredentials: true,  // Include cookies in the request
+        });
         console.log("Logout successful");
+        localStorage.setItem("isAuthenticated","false")
+        // localStorage.removeItem(token)
         dispatch({type: LOGOUT_SUCCESS});
     } catch (error) {
         console.log("Logout error:", error);
