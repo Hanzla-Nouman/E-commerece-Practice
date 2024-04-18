@@ -14,8 +14,7 @@ import store from "./store";
 import { loadUser, logout } from "./store/userActions";
 function App() {
   
-  const {user} = useSelector(state => state.userReducer)
-  console.log(user)
+  
   useEffect(() => {
 
     store.dispatch(loadUser())

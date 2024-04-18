@@ -28,7 +28,7 @@ const Login = () => {
 
   useEffect(() => {
     const storedIsAuthenticated = localStorage.getItem("isAuthenticated");
-    console.log("========================",storedIsAuthenticated)
+ 
     if (storedIsAuthenticated === true) {
       navigate("/account");
     } 

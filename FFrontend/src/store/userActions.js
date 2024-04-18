@@ -20,19 +20,21 @@ try {
 export const signup=(userData,navigate)=> async(dispatch)=>{
     
 try { 
-    console.log("requesting...")
+  
     dispatch({type: SIGNUP_REQUEST});
     const config = {headers:{"Content-Type":"multipart/form-data"}, withCredentials: true }
-
     const data= await axios.post('http://localhost:4000/api/v2/register',userData,config);
-    localStorage.setItem("isAuthenticated","true")
-    console.log("successed")
+     localStorage.setItem("isAuthenticated","true")
     navigate("/account")
+    window.location.reload();
    
     dispatch({type: SIGNUP_SUCCESS, payload:data.user})
 } catch (error) {
-    console.log("error: " + error)
-    dispatch({type: SIGNUP_FAILURE,payload: error.response.data.message}) 
+    if (error.response && error.response.data) {
+        dispatch({ type: LOAD_USER_FAILURE, payload: error.response.data.message });
+    } else {
+        dispatch({ type: LOAD_USER_FAILURE, payload: "Error loading user data" });
+    }
 }
 }
 
@@ -46,22 +48,22 @@ export const loadUser = ()=> async(dispatch)=>{
        
         dispatch({type: LOAD_USER_SUCCESS, payload: data.user})
     } catch (error) {
-        dispatch({type: LOAD_USER_FAILURE,payload: error.response.data.message})
+        if (error.response && error.response.data) {
+            dispatch({ type: LOAD_USER_FAILURE, payload: error.response.data.message });
+        } else {
+            dispatch({ type: LOAD_USER_FAILURE, payload: "Error loading user data" });
+        }
     }
     }
     
   export const logout = () => async(dispatch)=>{
     try {
-        console.log("Logging out...");
         await axios.get('http://localhost:4000/api/v2/logout', {
             withCredentials: true,  // Include cookies in the request
         });
-        console.log("Logout successful");
         localStorage.setItem("isAuthenticated","false")
-        // localStorage.removeItem(token)
         dispatch({type: LOGOUT_SUCCESS});
     } catch (error) {
-        console.log("Logout error:", error);
         dispatch({type: LOGOUT_FAILURE, payload: error.response ? error.response.data.message : "Logout failed"});
     }
 }

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Search from './Search'
 import { useSelector } from 'react-redux';
-import { logout } from '../store/userActions';
+import { loadUser, logout } from '../store/userActions';
 import { useDispatch } from 'react-redux';
 const Navbar = () => {  
   const dispatch = useDispatch()
@@ -10,13 +10,18 @@ const Navbar = () => {
 
 
   const logoutUser=()=>{
-    console.log("hiiiiiiiiiiii")
+    
     dispatch(logout())
     navigate("/")
   }
+
+ 
+
   let {userRole,isAuthenticated} = useSelector(state => state.userReducer)
-    console.log("user", userRole,isAuthenticated);
+console.log(isAuthenticated)
+
     
+
 
   return (
     <>

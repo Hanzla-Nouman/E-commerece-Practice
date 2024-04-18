@@ -43,7 +43,6 @@ const Signup = () => {
     myForm.set("email", email);
     myForm.set("password", password);
     // myForm.set("avatar", avatar);
-    console.log(name,email,password)
     dispatch(signup(myForm,navigate));
     setUser({name: "",
     email: "",
