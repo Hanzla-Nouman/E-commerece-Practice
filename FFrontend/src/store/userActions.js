@@ -25,6 +25,7 @@ try {
     const config = {headers:{"Content-Type":"multipart/form-data"}, withCredentials: true }
 
     const data= await axios.post('http://localhost:4000/api/v2/register',userData,config);
+    localStorage.setItem("isAuthenticated","true")
     console.log("successed")
     navigate("/account")
    
