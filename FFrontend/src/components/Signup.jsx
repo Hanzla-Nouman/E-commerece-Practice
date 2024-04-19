@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import { signup } from "../store/userActions";
+import { signup ,loadUser} from "../store/userActions";
 import { useDispatch,useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Loader from './Loader'
@@ -26,29 +26,28 @@ const Signup = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   }
 
-  // const registerAvatarChange = (e) => {
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     if (reader.readyState === 2) {
-  //       setAvatarPreview(reader.result);
-  //       setAvatar(reader.result);
-  //     }};
-  //   reader.readAsDataURL(e.target.files[0])};
-
   const {  loading } = useSelector(state => state.userReducer);
    
 
-  const handleSignupSubmit = (e) => {
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
     const myForm = new FormData();
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("password", password);
-    // myForm.set("avatar", avatar);
-    dispatch(signup(myForm,navigate));
-    setUser({name: "",
-    email: "",
-    password: "",})
+    try {
+      await dispatch(signup(myForm, navigate));
+      await dispatch(loadUser());
+  
+      // Reset the user state
+      setUser({
+        name: "",
+        email: "",
+        password: "",
+      });
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
   };
   return (
     <>

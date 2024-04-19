@@ -1013,8 +1013,8 @@ select {
 
 .btn {
   display: inline-flex;
-  height: 3rem;
-  min-height: 3rem;
+  height: 2.5rem;
+  min-height: 2.5rem;
   flex-shrink: 0;
   cursor: pointer;
   -webkit-user-select: none;
@@ -1026,8 +1026,8 @@ select {
   border-radius: var(--rounded-btn, 0.5rem);
   border-color: transparent;
   border-color: oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity));
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
   text-align: center;
   font-size: 0.875rem;
   line-height: 1em;

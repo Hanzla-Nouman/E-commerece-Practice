@@ -1,12 +1,13 @@
 import {createStore,combineReducers,applyMiddleware} from "redux"
-import productReducer, { productDetailsReducer } from "./productReducer";
 import {thunk} from 'redux-thunk';
-import { userReducer } from "./userReducer";
+import productReducer, { productDetailsReducer } from "./productReducer";
+import { userReducer,profileReducer } from "./userReducer";
 
 const rootReducer = combineReducers({
     productReducer: productReducer,
     productDetailsReducer:productDetailsReducer,
-    userReducer: userReducer
+    userReducer: userReducer,
+    profileReducer: profileReducer
   });
 
 const store = createStore(rootReducer,applyMiddleware(thunk));

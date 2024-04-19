@@ -3,6 +3,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
+import UpdateProfile from "./components/UpdateProfile";
 import Navbar from "./components/Navbar";
 import ProductDetails from "./components/ProductDetails";
 import { InputStateProvider } from "./context/inputContext";
@@ -36,6 +37,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/updateProfile" element={<UpdateProfile />} />
       </Routes>
       <Footer />
       </InputStateProvider>

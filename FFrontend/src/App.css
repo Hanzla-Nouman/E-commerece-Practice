@@ -87,3 +87,17 @@ input[type="file"] {
   font-weight: 500;
   font-size: 13px;
 }
+.account-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px 0px 30px 0px;
+}
+
+.profile-card{
+  width: 700px;
+}
+.bttn-primary{
+  height: 30px;
+}

@@ -4,24 +4,16 @@ import Search from './Search'
 import { useSelector } from 'react-redux';
 import { loadUser, logout } from '../store/userActions';
 import { useDispatch } from 'react-redux';
+
 const Navbar = () => {  
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-
   const logoutUser=()=>{
-    
     dispatch(logout())
     navigate("/")
   }
-
- 
-
-  let {userRole,isAuthenticated,loading} = useSelector(state => state.userReducer)
-
-console.log(loading)
-    
-
+  let {userRole,isAuthenticated,loading,user} = useSelector(state => state.userReducer)
 
   return (
     <>
