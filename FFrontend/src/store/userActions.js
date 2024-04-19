@@ -121,9 +121,7 @@ export const updateProfile = (userData) => async (dispatch) => {
         config
       );
      
-
-  
-      dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.user });
+      dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
     } catch (error) {
       if (error.response && error.response.data) {
         dispatch({
