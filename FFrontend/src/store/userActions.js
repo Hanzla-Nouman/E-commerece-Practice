@@ -16,6 +16,10 @@ import {
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_RESET,
   UPDATE_PROFILE_FAILURE,
+  UPDATE_PASSWORD_REQUEST,
+  UPDATE_PASSWORD_SUCCESS,
+  UPDATE_PASSWORD_RESET,
+  UPDATE_PASSWORD_FAILURE,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -120,7 +124,6 @@ export const updateProfile = (userData) => async (dispatch) => {
         userData,
         config
       );
-     
       dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
     } catch (error) {
       if (error.response && error.response.data) {
@@ -133,6 +136,31 @@ export const updateProfile = (userData) => async (dispatch) => {
       }
     }
   };
+  
+  export const updatePassword = (password) => async (dispatch) => {
+      try {
+        dispatch({ type: UPDATE_PASSWORD_REQUEST });
+        const config = {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        };
+        const data = await axios.put(
+          "http://localhost:4000/api/v2/password/update",
+          password,
+          config
+        );
+        dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success });
+      } catch (error) {
+        if (error.response && error.response.data) {
+          dispatch({
+            type: UPDATE_PASSWORD_FAILURE,
+            payload: error.response.data.message,
+          });
+        } else {
+          dispatch({ type: UPDATE_PASSWORD_FAILURE, payload: "Error loading user data" });
+        }
+      }
+    };
 
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });

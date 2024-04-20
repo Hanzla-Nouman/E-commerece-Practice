@@ -139,34 +139,7 @@ const Signup = () => {
               </div>
               <div>
                
-                <div className="mt-2">
-                  
-                  {/* <div className="col-span-full">
-                    <label
-                      htmlFor="photo"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Photo
-                    </label>
-                    <div className="mt-2 flex items-center gap-x-3">
-                      <div className="avatar">
-                        <div className="w-16 rounded-full">
-                          <img src={avatarPreview} />
-                        </div>
-                      </div>
-                      <label htmlFor="fileInput" className="custom-file-input">
-                        Choose File
-                      </label>
-                      <input
-                        type="file"
-                        id="fileInput"
-                        name="avatar"
-                        accept="image/*"
-                        onChange={registerAvatarChange}
-                      />
-                    </div>
-                  </div> */}
-                </div>
+              
               </div>
               <div>
                 <button

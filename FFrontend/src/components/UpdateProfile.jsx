@@ -16,7 +16,9 @@ const UpdateProfile = () => {
     name: "",
     email: "",
   });
+  
   const { name, email } = User;
+
 
   const registerDataChange = (e) => {
     setUser({ ...User, [e.target.name]: e.target.value });

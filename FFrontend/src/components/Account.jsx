@@ -34,10 +34,10 @@ const { user, loading } = useSelector((state) => state.userReducer);
 
     <div className="card-actions" style={{ margin:"15px"}}>
       <Link to="/myOrders"><button className="btn btn-primary">My Orders</button></Link>
-      <Link to="/changePassword"><button className="btn btn-primary">Change Password</button></Link>
+      <Link to="/password/update"><button className="btn btn-primary">Change Password</button></Link>
     </div>
     <div className="card-actions" style={{ marginBottom:"20px"}}>
-      <Link to="/updateProfile"><button className="btn-lg btn btn-primary">Update Profile</button></Link>
+      <Link to="/me/update"><button className="btn-lg btn btn-primary">Update Profile</button></Link>
     </div>
   </div>
 </div>
