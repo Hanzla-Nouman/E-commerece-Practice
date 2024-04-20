@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login } from "../store/userActions";
 import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
+import {Link} from "react-router-dom"
 
 const Login = () => {
   const navigate = useNavigate();
 
+  
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.userReducer
   );
-
+  
   
   const dispatch = useDispatch();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
+  
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -25,18 +27,25 @@ const Login = () => {
       console.error("Login failed:", error);
     }
   };
-
+  
   useEffect(() => {
     const storedIsAuthenticated = localStorage.getItem("isAuthenticated");
- 
+    
     if (storedIsAuthenticated === true) {
       navigate("/account");
     } 
-     else {
+    else {
       navigate("/login");
-
-     }
+      
+    }
     
+  }, []);
+  const emailRef = useRef(null);
+  useEffect(() => {
+    // Set focus on the input field when the component mounts
+    if (emailRef.current) {
+      emailRef.current.focus();
+    }
   }, []);
   return (
     <>
@@ -68,7 +77,7 @@ const Login = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-gray-900 text-left"
+                    className="block font-semibold leading-6 text-gray-900 text-left"
                   >
                     Email address
                   </label>
@@ -77,6 +86,7 @@ const Login = () => {
                       id="email"
                       name="email"
                       type="email"
+                      ref={emailRef}
                       autoComplete="email"
                       placeholder="example123@gmail.com"
                       required
@@ -91,7 +101,7 @@ const Login = () => {
                   <div className="flex ">
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block  font-semibold leading-6 text-gray-900"
                     >
                       Password
                     </label>
@@ -110,8 +120,8 @@ const Login = () => {
                     />
                   </div>
                 </div>
-                <div>
-                  <div className="flex "></div>
+                <div  style={{ textAlign: "right"}}>
+                <Link to ="/password/forgot" class="text-sm font-medium text-indigo-600">Forget Password?</Link>
                 </div>
 
                 <div>

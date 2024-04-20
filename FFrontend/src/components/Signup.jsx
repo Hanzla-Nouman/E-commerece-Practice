@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef,useEffect } from "react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { signup ,loadUser} from "../store/userActions";
 import { useDispatch,useSelector } from "react-redux";
@@ -7,13 +7,7 @@ import Loader from './Loader'
 const Signup = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [avatar, setAvatar] = useState(
-    "https://github.com/meabhisingh/mernProjectEcommerce/blob/master/frontend/src/images/Profile.png?raw=true"
-  );
-  const [avatarPreview, setAvatarPreview] = useState(
-    "https://github.com/meabhisingh/mernProjectEcommerce/blob/master/frontend/src/images/Profile.png?raw=true"
-  );
-
+ 
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -49,6 +43,14 @@ const Signup = () => {
       console.error("Error during signup:", error);
     }
   };
+  const nameRef = useRef(null);
+
+  useEffect(() => {
+    // Set focus on the input field when the component mounts
+    if (nameRef.current) {
+      nameRef.current.focus();
+    }
+  }, []);
   return (
     <>
      {loading?(<Loader/>):( <div
@@ -85,6 +87,7 @@ const Signup = () => {
                       type="text"
                       name="name"
                       id="name"
+                      ref={nameRef}
                       value={name}
                       autoComplete="given-name"
                       placeholder="John Doe"

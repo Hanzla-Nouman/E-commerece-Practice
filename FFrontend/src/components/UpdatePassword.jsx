@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { updatePassword ,clearErrors,loadUser} from "../store/userActions";
@@ -10,6 +10,8 @@ const UpdatePassword = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
  
+    const passwordRef = useRef(null);
+
     const { loading } = useSelector(
       (state) => state.profileReducer
     );
@@ -35,7 +37,6 @@ const UpdatePassword = () => {
         myForm.set("confirmPassword", confirmPassword);
         try {
           await dispatch(updatePassword(myForm));
-        //   await dispatch(loadUser());
           navigate("/account");
           setPasswords({
             oldPassword: "",
@@ -47,7 +48,12 @@ const UpdatePassword = () => {
         }
       };
 
- 
+      useEffect(() => {
+        // Set focus on the input field when the component mounts
+        if (passwordRef.current) {
+          passwordRef.current.focus();
+        }
+      }, []);
 
   return (
     <>
@@ -87,6 +93,7 @@ const UpdatePassword = () => {
                     </div>
                     <div className=" mt-1.5">
                       <input
+                       ref={passwordRef}
                         id="password"
                         name="oldPassword"
                         value={oldPassword}
@@ -94,6 +101,7 @@ const UpdatePassword = () => {
                         placeholder="Old Password"
                         autoComplete="current-password"
                         required
+                        focus
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         onChange={passwordDataChange}
                       />

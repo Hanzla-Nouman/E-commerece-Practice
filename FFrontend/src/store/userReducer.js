@@ -19,6 +19,9 @@ import {
   UPDATE_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_RESET,
   UPDATE_PASSWORD_FAILURE,
+  FORGET_PASSWORD_REQUEST,
+  FORGET_PASSWORD_SUCCESS,
+  FORGET_PASSWORD_FAILURE,
 
 } from "./actionTypes";
 
@@ -106,6 +109,35 @@ export const profileReducer = (state = {}, action) => {
       };
     case UPDATE_PROFILE_FAILURE:
     case UPDATE_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loading: false, 
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+export const forgetPasswordReducer = (state = {}, action) => {
+  switch (action.type) {
+    case FORGET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null
+      };
+    case FORGET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload
+      };
+    case FORGET_PASSWORD_FAILURE:
       return {
         ...state,
         loading: false, 

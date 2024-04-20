@@ -4,10 +4,10 @@ const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
-const cloudinary = require ('cloudinary');
- 
+const cloudinary = require("cloudinary");
+
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-  const { name, email, password } = req.body; 
+  const { name, email, password } = req.body;
   const user = await User.create({
     name,
     email,
@@ -15,7 +15,6 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
   });
   sendToken(user, 201, res);
 });
-
 
 // Login a User
 exports.loginUser = catchAsyncError(async (req, res, next) => {
@@ -38,16 +37,15 @@ exports.logoutUser = catchAsyncError(async (req, res, next) => {
   console.log("Current token cookie:", req.cookies.token); // Log current token cookie value
 
   res.cookie("token", "", {
-    expires: new Date(0),  // Set the expires date to a past date
+    expires: new Date(0), // Set the expires date to a past date
     httpOnly: true,
-    path: "/",  // Set to the root path
+    path: "/", // Set to the root path
   });
   res.status(200).json({
     success: true,
     message: "Logged Out",
   });
 });
- 
 
 // Forgot Password
 
@@ -56,18 +54,14 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
   if (!user) {
     return next(new ErrorHandler("User not found", 404));
   }
-
   // Get ResetPassword Token
-  const resetToken = user.getResetPasswordToken();
-
+  const resetToken = user.getResetPasswordToken(); 
   await user.save({ validateBeforeSave: false });
-
   const resetPasswordUrl = `${req.protocol}://${req.get(
     "host"
   )}/password/reset/${resetToken}`;
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
-
   try {
     await sendEmail({
       email: user.email,

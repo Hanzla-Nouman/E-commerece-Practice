@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import UpdateProfile from "./components/UpdateProfile";
 import UpdatePassword from "./components/UpdatePassword";
+import ForgetPassword from "./components/ForgetPassword";
 import Navbar from "./components/Navbar";
 import ProductDetails from "./components/ProductDetails";
 import { InputStateProvider } from "./context/inputContext";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/account" element={<Account />} />
         <Route path="/me/update/" element={<UpdateProfile />} />
         <Route path="/password/update" element={<UpdatePassword />} />
+        <Route path="/password/forgot" element={<ForgetPassword />} />
       </Routes>
       <Footer />
       </InputStateProvider>

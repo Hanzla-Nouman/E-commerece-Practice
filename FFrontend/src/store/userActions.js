@@ -20,6 +20,9 @@ import {
   UPDATE_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_RESET,
   UPDATE_PASSWORD_FAILURE,
+  FORGET_PASSWORD_REQUEST,
+  FORGET_PASSWORD_SUCCESS,
+  FORGET_PASSWORD_FAILURE,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -161,6 +164,25 @@ export const updateProfile = (userData) => async (dispatch) => {
         }
       }
     };
+
+    export const forgetPassword = (email) => async (dispatch) => {
+        try {
+          dispatch({ type: FORGET_PASSWORD_REQUEST });
+          const config = {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          };       
+          const { data } = await axios.post(
+            "http://localhost:4000/api/v2/password/forgot",
+            {email},
+            config
+          );
+      
+          dispatch({ type: FORGET_PASSWORD_SUCCESS, payload: data.user });
+        } catch (error) {
+          dispatch({ type: FORGET_PASSWORD_FAILURE, payload: error.response.data.message });
+        }
+      };
 
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
