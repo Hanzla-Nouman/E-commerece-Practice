@@ -23,6 +23,9 @@ import {
   FORGET_PASSWORD_REQUEST,
   FORGET_PASSWORD_SUCCESS,
   FORGET_PASSWORD_FAILURE,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAILURE,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -116,74 +119,112 @@ export const logout = () => async (dispatch) => {
 };
 
 export const updateProfile = (userData) => async (dispatch) => {
-    try {
-      dispatch({ type: UPDATE_PROFILE_REQUEST });
-      const config = {
-        headers: { "Content-Type": "multipart/form-data" },
-        withCredentials: true,
-      };
-      const data = await axios.put(
-        "http://localhost:4000/api/v2/me/update",
-        userData,
-        config
-      );
-      dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
-    } catch (error) {
-      if (error.response && error.response.data) {
-        dispatch({
-          type: UPDATE_PROFILE_FAILURE,
-          payload: error.response.data.message,
-        });
-      } else {
-        dispatch({ type: UPDATE_PROFILE_FAILURE, payload: "Error loading user data" });
-      }
-    }
-  };
-  
-  export const updatePassword = (password) => async (dispatch) => {
-      try {
-        dispatch({ type: UPDATE_PASSWORD_REQUEST });
-        const config = {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        };
-        const data = await axios.put(
-          "http://localhost:4000/api/v2/password/update",
-          password,
-          config
-        );
-        dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success });
-      } catch (error) {
-        if (error.response && error.response.data) {
-          dispatch({
-            type: UPDATE_PASSWORD_FAILURE,
-            payload: error.response.data.message,
-          });
-        } else {
-          dispatch({ type: UPDATE_PASSWORD_FAILURE, payload: "Error loading user data" });
-        }
-      }
+  try {
+    dispatch({ type: UPDATE_PROFILE_REQUEST });
+    const config = {
+      headers: { "Content-Type": "multipart/form-data" },
+      withCredentials: true,
     };
+    const data = await axios.put(
+      "http://localhost:4000/api/v2/me/update",
+      userData,
+      config
+    );
+    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
+  } catch (error) {
+    if (error.response && error.response.data) {
+      dispatch({
+        type: UPDATE_PROFILE_FAILURE,
+        payload: error.response.data.message,
+      });
+    } else {
+      dispatch({
+        type: UPDATE_PROFILE_FAILURE,
+        payload: "Error loading user data",
+      });
+    }
+  }
+};
 
-    export const forgetPassword = (email) => async (dispatch) => {
-        try {
-          dispatch({ type: FORGET_PASSWORD_REQUEST });
-          const config = {
-            headers: { "Content-Type": "application/json" },
-            withCredentials: true,
-          };       
-          const { data } = await axios.post(
-            "http://localhost:4000/api/v2/password/forgot",
-            {email},
-            config
-          );
-      
-          dispatch({ type: FORGET_PASSWORD_SUCCESS, payload: data.user });
-        } catch (error) {
-          dispatch({ type: FORGET_PASSWORD_FAILURE, payload: error.response.data.message });
-        }
-      };
+export const updatePassword = (password) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PASSWORD_REQUEST });
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    const data = await axios.put(
+      "http://localhost:4000/api/v2/password/update",
+      password,
+      config
+    );
+    dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success });
+  } catch (error) {
+    if (error.response && error.response.data) {
+      dispatch({
+        type: UPDATE_PASSWORD_FAILURE,
+        payload: error.response.data.message,
+      });
+    } else {
+      dispatch({
+        type: UPDATE_PASSWORD_FAILURE,
+        payload: "Error loading user data",
+      });
+    }
+  }
+};
 
+export const forgetPassword = (email) => async (dispatch) => {
+  try {
+    dispatch({ type: FORGET_PASSWORD_REQUEST });
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    const { data } = await axios.post(
+      "http://localhost:4000/api/v2/password/forgot",
+      { email },
+      config
+    );
+
+    dispatch({ type: FORGET_PASSWORD_SUCCESS, payload: data.user });
+  } catch (error) {
+    dispatch({
+      type: FORGET_PASSWORD_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const resetPassword = (token,password) => async (dispatch) => {
+    console.log("Token:", token);
+console.log("Password:", password);
+
+  try {
+    dispatch({ type: RESET_PASSWORD_REQUEST });
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    const  {data}  = await axios.put(
+      `http://localhost:4000/api/v2/password/reset/${token}`,
+      password,
+      config
+    );
+
+    dispatch({ type: RESET_PASSWORD_SUCCESS, payload: data.success });
+  } catch (error) {
+    // if (error.response && error.response.data) {
+    //   dispatch({
+    //     type: RESET_PASSWORD_FAILURE,
+    //     payload: error.response.data.message,
+    //   });
+    // } else {
+    //   dispatch({ type: RESET_PASSWORD_FAILURE, payload: "Error loading user data" });
+    // }
+    console.log(error)
+  }
+};
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };

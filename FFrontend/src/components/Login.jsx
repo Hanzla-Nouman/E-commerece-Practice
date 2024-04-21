@@ -121,7 +121,7 @@ const Login = () => {
                   </div>
                 </div>
                 <div  style={{ textAlign: "right"}}>
-                <Link to ="/password/forgot" class="text-sm font-medium text-indigo-600">Forget Password?</Link>
+                <Link to ="/password/forgot" className="text-sm font-medium text-indigo-600">Forget Password?</Link>
                 </div>
 
                 <div>

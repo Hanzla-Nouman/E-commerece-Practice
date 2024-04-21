@@ -22,7 +22,9 @@ import {
   FORGET_PASSWORD_REQUEST,
   FORGET_PASSWORD_SUCCESS,
   FORGET_PASSWORD_FAILURE,
-
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAILURE,
 } from "./actionTypes";
 
 export const userReducer = (state = { user: {} }, action) => {
@@ -99,19 +101,19 @@ export const profileReducer = (state = {}, action) => {
       return {
         ...state,
         loading: false,
-        isUpdated: action.payload
+        isUpdated: action.payload,
       };
     case UPDATE_PROFILE_RESET:
     case UPDATE_PASSWORD_RESET:
       return {
         ...state,
-        isUpdated: false
+        isUpdated: false,
       };
     case UPDATE_PROFILE_FAILURE:
     case UPDATE_PASSWORD_FAILURE:
       return {
         ...state,
-        loading: false, 
+        loading: false,
         error: action.payload,
       };
     case CLEAR_ERRORS:
@@ -126,21 +128,29 @@ export const profileReducer = (state = {}, action) => {
 export const forgetPasswordReducer = (state = {}, action) => {
   switch (action.type) {
     case FORGET_PASSWORD_REQUEST:
+    case RESET_PASSWORD_REQUEST:
       return {
         ...state,
         loading: true,
-        error: null
+        error: null,
       };
     case FORGET_PASSWORD_SUCCESS:
       return {
         ...state,
         loading: false,
-        message: action.payload
+        success: action.payload,
       };
-    case FORGET_PASSWORD_FAILURE:
+    case RESET_PASSWORD_SUCCESS:
       return {
         ...state,
-        loading: false, 
+        loading: false,
+        message: action.payload,
+      };
+    case FORGET_PASSWORD_FAILURE:
+    case RESET_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loading: false,
         error: action.payload,
       };
     case CLEAR_ERRORS:

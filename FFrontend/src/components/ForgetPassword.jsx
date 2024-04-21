@@ -16,7 +16,13 @@ const ForgetPassword = () => {
   );
   const [email, setEmail] = useState('');
   const emailRef = useRef(null);
-
+ 
+  useEffect(() => {
+    // Set focus on the input field when the component mounts
+    if (emailRef.current) {
+      emailRef.current.focus();
+    }
+  }, []);
   const forgetPasswordSubmit =  async (e) => {
     e.preventDefault();
    await dispatch(forgetPassword(email))
