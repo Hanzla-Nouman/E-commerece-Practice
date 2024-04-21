@@ -206,12 +206,12 @@ console.log("Password:", password);
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     };
-    const  {data}  = await axios.put(
+    const  data  = await axios.put(
       `http://localhost:4000/api/v2/password/reset/${token}`,
       password,
       config
     );
-
+ 
     dispatch({ type: RESET_PASSWORD_SUCCESS, payload: data.success });
   } catch (error) {
     // if (error.response && error.response.data) {

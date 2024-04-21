@@ -39,7 +39,7 @@ const ResetPassword = () => {
           await dispatch(resetPassword(token,myForm)); 
         //   await dispatch(loadUser()); 
           
-        //  await  navigate("/login");
+         await  navigate("/login");
           setPasswords({
             password: "",
             confirmPassword: "",
