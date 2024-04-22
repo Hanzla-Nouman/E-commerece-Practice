@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect ,useRef} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { loadUser, updateProfile ,clearErrors} from "../store/userActions";
@@ -16,7 +16,7 @@ const UpdateProfile = () => {
     name: "",
     email: "",
   });
-  
+
   const { name, email } = User;
 
 
@@ -41,6 +41,14 @@ const UpdateProfile = () => {
       console.error("Error during signup:", error);
     }
   };
+  const nameRef = useRef(null);
+  useEffect(() => {
+    // Set focus on the input field when the component mounts
+    if (nameRef.current) {
+      nameRef.current.focus();
+    }
+  }, []);
+
   return (
     <>
       {loading ? (
@@ -79,6 +87,7 @@ const UpdateProfile = () => {
                       type="text"
                       name="name"
                       id="name"
+                      ref={nameRef}
                       value={name}
                       autoComplete="given-name"
                       placeholder="John Doe"

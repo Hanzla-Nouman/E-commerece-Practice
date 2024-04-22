@@ -10,8 +10,7 @@ const ResetPassword = () => {
     const { token } = useParams(); // Get token from URL params
     const dispatch = useDispatch();
     const navigate = useNavigate();
- 
-    const passwordRef = useRef(null);
+
 
     const { loading ,error,success} = useSelector(
       (state) => state.forgetPasswordReducer
@@ -48,7 +47,8 @@ const ResetPassword = () => {
           console.log("Error during signup:", error);
         }
       };
-
+    const passwordRef = useRef(null);
+      
       useEffect(() => {
         // Set focus on the input field when the component mounts
         if (passwordRef.current) {
@@ -79,7 +79,6 @@ const ResetPassword = () => {
                 <div className="divider"></div>
               </h2>
             </div>
-
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
               <form className="space-y-6" onSubmit={handlePasswordSubmit}>
                 <div className="sm:col-span-3">
