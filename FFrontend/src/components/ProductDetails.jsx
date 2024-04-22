@@ -20,8 +20,9 @@ const ProductDetails = () => {
   const options = {
     edit: false,
     value: product.rating,
-    color: "#7c7d7d",
-    size: window.innerWidth < 600 ? 20 : 25,
+    color: "gray",
+    activeColor:"#e91",
+    size: 20 ,
     isHalf: true,
   };
 
@@ -65,39 +66,41 @@ const ProductDetails = () => {
           </div>
           <div
             style={{
-              margin: "40px",
+              margin: "40px ",
+              
+             width:"500px"
             }}
           >
             <div>
               <div >
                 <h2 className="text-3xl font-semibold">{product.name}</h2>
-                <p className="font-semibold">Product # {product._id}</p>
+                <p className=" italic font-medium text-md" style={{color: "rgb(107 114 128)"}}># {product._id}</p>
               </div>
             
-              <div className="flex items-center font-semibold"> 
-              <ReactStars {...options} />  Overall Ratings
-              </div>
-              <div className="">
-                <span className="font-semibold"> ({product.numOfReviews} Reviews)</span>
-              </div>
+              <div className="flex   items-center font-semibold"> 
+             <p className="italic font-semibold mr-3">Ratings: </p>  <ReactStars {...options} />  
+             <a className=""><span className="font-semibold ml-3 link-hover text-slate-800 cursor-pointer"> ({product.numOfReviews} Reviews)</span></a>
+              </div>  
+              
+              
 
               <div className="">
                 <h1 className="text-3xl font-bold" style={{color:"#234"}}>{`$${product.price}`}</h1>
                 <div className="">
                   <div
-                    className=""
-                    style={{ display: "flex", justifyContent: "center" }}
+                    className="m-2"
+                    style={{ display: "flex" }}
                   >
-                    <button className="btn" onClick={decreaseQuantity}>
-                      -
+                    <button className="button-input" onClick={decreaseQuantity}>
+                    <span className=" font-bold text-lg " style={{fontSize:"25px"}}>-</span>
                     </button>
                     <input
-                      className="input input-bordered w-full max-w-xs"
+                      className="  count-input   ml-2 mr-2 "
                       readOnly
                       type="number"
                     />
-                    <button className="btn " onClick={increaseQuantity}>
-                      <b style={{ fontSize: "20px" }}>+</b>
+                    <button className="button-input font-black " onClick={increaseQuantity}>
+                      <span className=" font-bold text-lg " style={{fontSize:"25px"}}>+</span>
                     </button>
                   </div>
                   <button
@@ -108,18 +111,22 @@ const ProductDetails = () => {
                     Add to Cart
                   </button>
                 </div>
+<div style={{ display: "flex", alignItems: "center" }}>
+  <p style={{ display: "flex", alignItems: "center" }}>
+    <p className="font-semibold">Status: </p>
+    
+    <b className={product.Stock > 1 ? "text-green-800 " : "text-red-800 "} style={{ marginLeft: "10px" }}>
+      {product.Stock < 1 ? "OutOfStock" : "InStock"}
+    </b>
+  </p>
+</div>
 
-                <p>
-                  Status:
-                  <b className={product.stock < 1 ? "redColor" : "greenColor"}>
-                    {product.Stock < 1 ? "OutOfStock" : "InStock"}
-                  </b>
-                </p>
               </div>
 
-              <div className="detailsBlock-4">
-                Description : <p>{product.description}</p>
+              <div className="detailsBlock-4 font-bold">
+              Description :
               </div>
+                 <p className="font-semibold italic">{product.description}</p>
 
               <button className="btn btn-primary" onClick={submitReviewToggle}>
                 Submit Review
