@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom"; // Import useParams hook
 import { fetchProductDetails } from "../store/productActions";
@@ -14,6 +14,8 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams(); // Access route parameters using useParams hook
   
+const [totalItems, setTotalItems] = useState(1)
+console.log(totalItems)
   const { product, loading, error } = useSelector(
     (state) => state.productDetailsReducer
   );
@@ -25,6 +27,18 @@ const ProductDetails = () => {
     size: 20 ,
     isHalf: true,
   };
+  const optionsCarousel={
+    autoPlay: 1,
+    infiniteLoop:1,
+    autoFocus:1,
+    showIndicators:1,
+    useKeyboardArrows:1,
+    showStatus:0,
+    showArrows:0,
+    interval:4000
+    
+    
+  }
 
  
   useEffect(() => {
@@ -32,8 +46,12 @@ const ProductDetails = () => {
   }, [dispatch, id]);
 
   const submitReviewToggle = () => {};
-  const decreaseQuantity = () => {};
-  const increaseQuantity = () => {};
+  const decreaseQuantity = () => {
+    setTotalItems(totalItems=>totalItems-1)
+  };
+  const increaseQuantity = ( ) => {
+    setTotalItems(totalItems=>totalItems+1)
+  };
   const addToCartHandler = () => {};
 
   return (
@@ -54,8 +72,8 @@ const ProductDetails = () => {
               height: "30%",
               margin: "50px 70px",
             }}
-          >
-            <Carousel>
+          > 
+            <Carousel {...optionsCarousel}>
               {product.images &&
                 product.images.map((image) => (
                   <div>
@@ -78,7 +96,7 @@ const ProductDetails = () => {
               </div>
             
               <div className="flex   items-center font-semibold"> 
-             <p className="italic font-semibold mr-3">Ratings: </p>  <ReactStars {...options} />  
+             <ReactStars {...options} />  
              <a className=""><span className="font-semibold ml-3 link-hover text-slate-800 cursor-pointer"> ({product.numOfReviews} Reviews)</span></a>
               </div>  
               
@@ -91,13 +109,14 @@ const ProductDetails = () => {
                     className="m-2"
                     style={{ display: "flex" }}
                   >
-                    <button className="button-input" onClick={decreaseQuantity}>
+                    <button disabled={totalItems===1}className="button-input" onClick={decreaseQuantity}>
                     <span className=" font-bold text-lg " style={{fontSize:"25px"}}>-</span>
                     </button>
                     <input
-                      className="  count-input   ml-2 mr-2 "
+                      className=" bg-base-300 count-input   ml-2 mr-2 "
                       readOnly
                       type="number"
+                      value={totalItems}
                     />
                     <button className="button-input font-black " onClick={increaseQuantity}>
                       <span className=" font-bold text-lg " style={{fontSize:"25px"}}>+</span>

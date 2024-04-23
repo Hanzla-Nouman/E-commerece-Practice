@@ -205,7 +205,7 @@ console.log("Password:", password);
     const config = {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
-    };
+    };   
     const  data  = await axios.put(
       `http://localhost:4000/api/v2/password/reset/${token}`,
       password,
