@@ -151,10 +151,10 @@ const Home = () => {
             prevPageText="Prev"
             firstPageText="1st"
             lastPageText="Last"
-            itemClass="page-item"
-            linkClass="page-link"
-            activeClass="pageItemActive"
-            activeLinkClass="pageLinkActive"
+            itemclassName="page-item"
+            linkclassName="page-link"
+            activeclassName="pageItemActive"
+            activeLinkclassName="pageLinkActive"
           />
           </div>
           )}

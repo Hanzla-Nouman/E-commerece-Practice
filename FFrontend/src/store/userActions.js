@@ -37,7 +37,7 @@ export const login = (email, password, navigate) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      "http://localhost:4000/api/v2/login",
+      "http://localhost:4000/api/v1/login",
       { email, password },
       config
     );
@@ -59,7 +59,7 @@ export const signup = (userData, navigate) => async (dispatch) => {
       withCredentials: true,
     };
     const data = await axios.post(
-      "http://localhost:4000/api/v2/register",
+      "http://localhost:4000/api/v1/register",
       userData,
       config
     );
@@ -88,7 +88,7 @@ export const loadUser = () => async (dispatch) => {
       withCredentials: true,
     };
 
-    const { data } = await axios.get("http://localhost:4000/api/v2/me", config);
+    const { data } = await axios.get("http://localhost:4000/api/v1/me", config);
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
@@ -105,7 +105,7 @@ export const loadUser = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get("http://localhost:4000/api/v2/logout", {
+    await axios.get("http://localhost:4000/api/v1/logout", {
       withCredentials: true, // Include cookies in the request
     });
     localStorage.removeItem("isAuthenticated", "false");
@@ -126,7 +126,7 @@ export const updateProfile = (userData) => async (dispatch) => {
       withCredentials: true,
     };
     const data = await axios.put(
-      "http://localhost:4000/api/v2/me/update",
+      "http://localhost:4000/api/v1/me/update",
       userData,
       config
     );
@@ -154,7 +154,7 @@ export const updatePassword = (password) => async (dispatch) => {
       withCredentials: true,
     };
     const data = await axios.put(
-      "http://localhost:4000/api/v2/password/update",
+      "http://localhost:4000/api/v1/password/update",
       password,
       config
     );
@@ -182,7 +182,7 @@ export const forgetPassword = (email) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.post(
-      "http://localhost:4000/api/v2/password/forgot",
+      "http://localhost:4000/api/v1/password/forgot",
       { email },
       config
     );
@@ -207,7 +207,7 @@ console.log("Password:", password);
       withCredentials: true,
     };   
     const  data  = await axios.put(
-      `http://localhost:4000/api/v2/password/reset/${token}`,
+      `http://localhost:4000/api/v1/password/reset/${token}`,
       password,
       config
     );
