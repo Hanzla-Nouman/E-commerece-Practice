@@ -2639,10 +2639,6 @@ html:has(.drawer-toggle:checked) {
   margin: 0.75rem;
 }
 
-.m-5 {
-  margin: 1.25rem;
-}
-
 .m-4 {
   margin: 1rem;
 }
