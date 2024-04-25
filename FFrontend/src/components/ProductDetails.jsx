@@ -1,24 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
 import { useParams } from "react-router-dom"; // Import useParams hook
 import { fetchProductDetails } from "../store/productActions";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import Navbar from "./Navbar";
 import ReviewCard from "./ReviewCard";
 import Loader from "./Loader";
 import ReactStars from "react-rating-stars-component";
 import { addItemsToCart } from "../store/cartActions";
 
 const ProductDetails = () => {
-  const dispatch = useDispatch();
-  const { id } = useParams(); // Access route parameters using useParams hook
-
-  const [totalItems, setTotalItems] = useState(1);
  
+
+  const { id } = useParams(); // Access route parameters using useParams hook
+  const dispatch = useDispatch();
+  
+  const [totalItems, setTotalItems] = useState(1);
+  
   const { product, loading, error } = useSelector(
     (state) => state.productDetailsReducer
   );
+  // const notify = () => toast(`${product.name} added to cart ${totalItems}`);
   const options = {
     edit: false,
     value: product.rating,
@@ -52,6 +57,7 @@ const ProductDetails = () => {
   const addToCartHandler = () => {
     dispatch(addItemsToCart(id,totalItems))
     console.log("success",id,"=======",totalItems)
+    // notify()
   };
 
   return (
@@ -67,6 +73,7 @@ const ProductDetails = () => {
             alignItems: "center",
           }}
         >
+          
           <div style={{ display: "flex" }}>
             <div
               style={{
@@ -74,12 +81,12 @@ const ProductDetails = () => {
                 height: "30%",
                 margin: "50px 70px",
               }}
-            >
+            > 
               <Carousel {...optionsCarousel}>
                 {product.images &&
                   product.images.map((image) => (
-                    <div>
-                      <img key={image.url} src={image.url} />
+                    <div key={image._id}>
+                      <img src={image.url} />
                     </div>
                   ))}
               </Carousel>
@@ -91,20 +98,22 @@ const ProductDetails = () => {
                 width: "500px",
               }}
             >
+        <ToastContainer />
+
               <div>
                 <div>
                   <h2 className="text-3xl font-semibold">{product.name}</h2>
-                  <p
+                  <span
                     className=" italic font-medium text-md"
                     style={{ color: "rgb(107 114 128)" }}
                   >
                     # {product._id}
-                  </p>
+                  </span>
                 </div>
 
                 <div className="flex   items-center font-semibold">
                   <ReactStars {...options} />
-                  <a className="">
+                  <a href="#reviews" >
                     <span className="font-semibold ml-3 link-hover text-slate-800 cursor-pointer">
                       {" "}
                       ({product.numOfReviews} Reviews)
@@ -145,6 +154,7 @@ const ProductDetails = () => {
                       className="btn btn-primary mt-2 mb-3 font-bold text-md "
                       disabled={product.Stock < 1 ? true : false}
                       onClick={addToCartHandler}
+                      
                     >
                       Add to Cart
                       <span className="material-symbols-outlined">
@@ -153,8 +163,8 @@ const ProductDetails = () => {
                     </button>
                   </div>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <p style={{ display: "flex", alignItems: "center" }}>
-                      <p className="font-semibold">Status: </p>
+                    <span style={{ display: "flex", alignItems: "center" }}>
+                      <span className="font-semibold">Status: </span>
 
                       <b
                         className={
@@ -166,14 +176,14 @@ const ProductDetails = () => {
                       >
                         {product.Stock < 1 ? "OutOfStock" : "InStock"}
                       </b>
-                    </p>
+                    </span>
                   </div>
                 </div>
 
-                <div className="detailsBlock-4 font-bold">Description :</div>
-                <p className="font-semibold italic">{product.description}</p>
+                {/* <div className="detailsBlock-4 font-bold">Description :</div> */}
+                {/* <span className="font-semibold italic">{product.description}</span> */}
 
-      <div className=" m-4">
+      <div className=" ">
                 <button
                   className="btn-submit "
                   onClick={submitReviewToggle}
@@ -185,18 +195,18 @@ const ProductDetails = () => {
             </div>
           </div>
           <div className="divider" style={{ marginTop: "-40px" }}>
-            <h3 className="reviewsHeading text-3xl">REVIEWS</h3>
+            <h3 className="reviewsHeading text-4xl font-bold">REVIEWS</h3>
           </div>
 
-          <div className="mb-3">
+          <div className="mb-3" id="reviews" >
             {product.reviews && product.reviews[0] ? (
               <div className="reviews grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-3">
                 {product.reviews.map((review) => (
-                  <ReviewCard key={review.id} review={review} />
+                  <ReviewCard key={review._id} review={review} />
                 ))}
               </div>
             ) : (
-              <p className="noReviews">No Reviews Yet</p>
+              <span className="noReviews">No Reviews Yet</span>
             )}
           </div>
         </div>

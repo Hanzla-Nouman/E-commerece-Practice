@@ -123,7 +123,9 @@ input[type="file"] {
   background: #646161;
   transition: all .1s;
 
-  
+  html {
+    scroll-behavior: smooth;
+  }
 
  
 }
@@ -148,4 +150,19 @@ padding: 8px 10px;
 }
 .btn-submit:hover{
   background: #471effd7;
+}
+.cart-header{
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  box-sizing: border-box;
+  width: 75%;
+}
+.cart-header>p{
+  margin: 0px 15px;
+}
+.cart-header>p:first-child{
+  text-align: center;
+}
+.cart-header>p:last-child{
+  text-align: end;
 }
