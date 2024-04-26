@@ -23,20 +23,20 @@ const CartItemCard = ({ item }) => {
         <div className="mt-2 mb-2" style={{ display: "flex" }}>
           <button
             disabled={totalItems === 1}
-            className="button-input uni"
+            className="button-input-cart uni"
             onClick={decreaseQuantity}
           >
             <span className="material-symbols-outlined ">remove</span>
           </button>
 
           <input
-            className=" bg-base-300 count-input    "
+            className=" bg-base-300 count-input-cart    "
             readOnly
             value={totalItems}
           />
 
           <button
-            className="button-input font-black uni"
+            className="button-input-cart font-black uni"
             onClick={increaseQuantity}
           >
             <span className="material-symbols-outlined">add</span>

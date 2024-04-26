@@ -26,7 +26,7 @@ const ProductDetails = () => {
   // const notify = () => toast(`${product.name} added to cart ${totalItems}`);
   const options = {
     edit: false,
-    value: product.rating,
+    value: product.ratings,
     color: "gray",
     activeColor: "#e91",
     size: 20,
