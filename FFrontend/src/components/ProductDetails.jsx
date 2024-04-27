@@ -20,6 +20,9 @@ const ProductDetails = () => {
   
   const [totalItems, setTotalItems] = useState(1);
   
+  const { cartItems } = useSelector(
+    (state) => state.cartReducer
+  );
   const { product, loading, error } = useSelector(
     (state) => state.productDetailsReducer
   );
@@ -55,7 +58,7 @@ const ProductDetails = () => {
     setTotalItems((totalItems) => totalItems + 1);
   };
   const addToCartHandler = () => {
-    dispatch(addItemsToCart(id,totalItems))
+    dispatch(addItemsToCart(id,totalItems,cartItems))
     console.log("success",id,"=======",totalItems)
     // notify()
   };

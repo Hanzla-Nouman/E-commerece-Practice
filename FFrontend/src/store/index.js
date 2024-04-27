@@ -6,7 +6,7 @@ import {
   profileReducer,
   forgetPasswordReducer,
 } from "./userReducer";
-import { cartReducer } from "./cartReducer";
+import cartReducer from "./cartReducer";
 
 const rootReducer = combineReducers({
   productReducer: productReducer,

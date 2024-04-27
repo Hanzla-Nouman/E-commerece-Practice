@@ -1,6 +1,6 @@
 import { ADD_TO_CART } from "./actionTypes";
 
-export const cartReducer=(state={cartItems:[]},action)=>{
+ const cartReducer=(state={cartItems:[]},action)=>{
 switch(action.type)
 {
     case ADD_TO_CART:
@@ -24,3 +24,4 @@ switch(action.type)
         return state;
 }
 }
+export default cartReducer

@@ -6,6 +6,7 @@ const Cart = () => {
     const dispatch = useDispatch()
     const {cartItems} = useSelector(state=>state.cartReducer)
   console.log(cartItems)
+  
   return (
     <>
       <div>

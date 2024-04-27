@@ -1,9 +1,9 @@
 import { ADD_TO_CART } from "./actionTypes"; 
-import axios from "axios";       
-
-export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
+import axios from "axios";      
+import {useSelector} from "react-redux"
+export const addItemsToCart = (id, quantity,cartItems) => async (dispatch) => {
   const {data} = await axios.get(`http://localhost:4000/api/v1/product/${id}`);
-
+  
   dispatch({   
     type: ADD_TO_CART,       
     payload: {      
@@ -15,5 +15,5 @@ export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
       quantity,
     },
   });
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+  localStorage.setItem("cartItems", JSON.stringify([...cartItems]));
 };
