@@ -14,8 +14,8 @@ const CartItemCard = ({ item }) => {
         <img src={item.image} alt="" width={"60px"} height={"60px"} />
         <p className="ml-2 text-left mr-2">
           <a href="" className="font-link">
-            {item.product}
-          </a>
+            {item.name}
+          </a> 
         </p>
       </span>
       <span className="ml-3">{`$${item.price}`}</span>

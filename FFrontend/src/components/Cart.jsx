@@ -19,7 +19,7 @@ const Cart = () => {
                 <p style={{ marginLeft: "23px" }}>Quantity</p>
                 <p style={{ marginRight: "40px" }}>Subtotal</p>
               </div>
-              {/* {cartItems && cartItems.map((item)=> (<CartItemCard item={item} /> ))} */}
+              {cartItems && cartItems.map((item)=> (<CartItemCard item={item} /> ))}
               
               {cartItems && cartItems.map((item)=>{<CartItemCard item={item} />})}
             </div>
