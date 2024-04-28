@@ -23,6 +23,8 @@ const ProductDetails = () => {
   const { cartItems } = useSelector(
     (state) => state.cartReducer
   );
+  console.log(cartItems)
+  
   const { product, loading, error } = useSelector(
     (state) => state.productDetailsReducer
   );
@@ -57,9 +59,9 @@ const ProductDetails = () => {
   const increaseQuantity = () => {
     setTotalItems((totalItems) => totalItems + 1);
   };
-  const addToCartHandler = () => {
-    dispatch(addItemsToCart(id,totalItems,cartItems))
-    console.log("success",id,"=======",totalItems)
+  const addToCartHandler = async() => {
+    await dispatch(addItemsToCart(id,totalItems,cartItems))
+    console.log("success",id,"=======",totalItems,"===========",cartItems)
     // notify()
   };
 

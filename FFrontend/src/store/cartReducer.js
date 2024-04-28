@@ -8,6 +8,8 @@ switch(action.type)
         const existItem=state.cartItems.find(i=>i.product===item.product);
         if(existItem)
         {
+          const  cartItems = state.cartItems.map(i=>i.product===existItem.product?item:i)
+            console.log(cartItems,"at reducer")
             return{
                ...state,        
                 cartItems:state.cartItems.map(i=>i.product===existItem.product?item:i)
@@ -15,6 +17,8 @@ switch(action.type)
         }   
         else
         {
+           const  cartItems = [...state.cartItems,item]
+            console.log(cartItems,"at reducer2")
             return{
                ...state,
                 cartItems:[...state.cartItems,item]

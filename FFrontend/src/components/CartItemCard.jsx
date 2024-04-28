@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 const CartItemCard = ({ item }) => {
   const [totalItems, setTotalItems] = useState(item.quantity);
-  const decreaseQuantity = () => {
+  const decreaseQuantity = () => { 
     setTotalItems((total) => total - 1);
   };
   const increaseQuantity = () => {
