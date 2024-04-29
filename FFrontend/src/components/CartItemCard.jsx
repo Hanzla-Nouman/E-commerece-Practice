@@ -1,15 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { addItemsToCart } from "../store/cartActions";
+import { useDispatch,useSelector } from "react-redux";
 const CartItemCard = ({ item }) => {
-  const [totalItems, setTotalItems] = useState(item.quantity);
+
+const { cartItems } = useSelector((state) => state.cartReducer);
+const dispatch = useDispatch()
   const decreaseQuantity = () => { 
-    setTotalItems((total) => total - 1);
+    quantity = quantity - 1;
+    console.log(id,quantity,stock)
+    if (stock <= quantity) {
+      return;
+    }
+    dispatch(addItemsToCart(id,quantity,cartItems))
   };
-  const increaseQuantity = () => {
-    setTotalItems((total) => total + 1);
+  const increaseQuantity = (id,quantity,stock) => {
+   quantity = quantity + 1;
+    console.log(id,quantity,stock)
+    if (stock <= quantity) {
+      return;
+    }
+    dispatch(addItemsToCart(id,quantity,cartItems))
   };
 
   return (
-    <div className=" single-item-cart font-semibold mt-2 p-2  bg-slate-200 items-center">
+    <div className=" single-item-cart font-semibold mt-2 p-2  bg-slate-200 items-center" >
       <span className="flex ">
         <img src={item.image} alt="" width={"60px"} height={"60px"} />
         <p className="ml-2 text-left mr-2">
@@ -22,9 +36,8 @@ const CartItemCard = ({ item }) => {
       <span>
         <div className="mt-2 mb-2" style={{ display: "flex" }}>
           <button
-            disabled={totalItems === 1}
             className="button-input-cart uni"
-            onClick={decreaseQuantity}
+            onClick={()=>decreaseQuantity}
           >
             <span className="material-symbols-outlined ">remove</span>
           </button>
@@ -32,18 +45,18 @@ const CartItemCard = ({ item }) => {
           <input
             className=" bg-base-300 count-input-cart    "
             readOnly
-            value={totalItems}
+            value={item.quantity}
           />
 
           <button
             className="button-input-cart font-black uni"
-            onClick={increaseQuantity}
+            onClick={()=>increaseQuantity(item.product,item.quantity,item.stock)}
           >
             <span className="material-symbols-outlined">add</span>
           </button>
         </div>
       </span>
-      <span>${item.price * totalItems}</span>
+      <span>${(item.price * item.quantity).toFixed(2)}</span>
       <span className="cross">
         <span className="material-symbols-outlined">delete</span>
       </span>

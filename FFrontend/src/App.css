@@ -147,7 +147,7 @@ html {
 .cart-header {
   display: grid;
   grid-template-columns: 4fr 1fr 1fr 1fr 0.25fr;
-  /* width: 75%; */
+  width:"90vw";
 }
 .cart-header > p {
   margin: 0px 15px;
@@ -160,8 +160,7 @@ html {
 }
 .single-item-cart {
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr 1fr 0.25fr;
-  /* width: 75%;   */
+  grid-template-columns: 4fr 1fr 1fr 1fr 0.25fr;  
 }
 .single-item-cart > span:first-child {
   text-align: center;

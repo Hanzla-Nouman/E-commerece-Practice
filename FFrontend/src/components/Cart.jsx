@@ -1,34 +1,38 @@
 import React from "react";
 import CartItemCard from "./CartItemCard";
-import {useDispatch,useSelector} from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
-    const dispatch = useDispatch()
-    const {cartItems} = useSelector(state=>state.cartReducer)
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector((state) => state.cartReducer);
   // console.log(cartItems)
-  
+
   return (
     <>
-      <div>
+      <div >
         <h1 className="text-3xl font-bold text-center m-3">Shopping Cart</h1>
         <div style={{ display: "flex" }}>
           <div className="m-4">
-            <div>
-              <div className="bg-slate-400 cart-header p-3  font-semibold">
+            <div >
+              <div className="bg-slate-400 cart-header p-3  font-semibold" >
                 <p>Product</p>
                 <p>Price</p>
                 <p style={{ marginLeft: "23px" }}>Quantity</p>
                 <p style={{ marginRight: "40px" }}>Subtotal</p>
               </div>
-              {cartItems && cartItems.map((item)=> (<CartItemCard item={item} /> ))}
-              
-              {cartItems && cartItems.map((item)=>{<CartItemCard item={item} />})}
+              <div>
+              {cartItems &&
+                cartItems.map((item) => (
+                  <CartItemCard item={item} key={item.name} />
+                  
+                ))}
+                </div>
             </div>
           </div>
 
           <div
             className="   mr-6 mt-4 bg-base-300 "
-            style={{ height: "300px", borderRadius: "0px", width: "500px" }}
+            style={{ height: "300px", borderRadius: "0px", minWidth: "300px" }}
           >
             <p className="font-semibold text-2xl ml-2 mt-3 text-center">
               Order Summary
