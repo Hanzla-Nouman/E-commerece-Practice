@@ -5,12 +5,9 @@ const CartItemCard = ({ item }) => {
 
 const { cartItems } = useSelector((state) => state.cartReducer);
 const dispatch = useDispatch()
-  const decreaseQuantity = () => { 
+  const decreaseQuantity = (id,quantity) => { 
     quantity = quantity - 1;
-    console.log(id,quantity,stock)
-    if (stock <= quantity) {
-      return;
-    }
+    console.log(id,quantity)
     dispatch(addItemsToCart(id,quantity,cartItems))
   };
   const increaseQuantity = (id,quantity,stock) => {
@@ -37,7 +34,7 @@ const dispatch = useDispatch()
         <div className="mt-2 mb-2" style={{ display: "flex" }}>
           <button
             className="button-input-cart uni"
-            onClick={()=>decreaseQuantity}
+            onClick={()=>decreaseQuantity(item.product,item.quantity)}
           >
             <span className="material-symbols-outlined ">remove</span>
           </button>

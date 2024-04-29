@@ -148,7 +148,7 @@ const ProductDetails = () => {
                       />
            
                       <button
-                      disabled={totalItems>=product.Stock}
+                      disabled={totalItems>=product.stock}
                         className="button-input font-black uni"
                         onClick={increaseQuantity}
                       >
@@ -157,7 +157,7 @@ const ProductDetails = () => {
                     </div>
                     <button
                       className="btn btn-primary mt-2 mb-3 font-bold text-md "
-                      disabled={product.Stock < 1 ? true : false}
+                      disabled={product.stock < 1 ? true : false}
                       onClick={addToCartHandler}
                       
                     >
@@ -173,13 +173,13 @@ const ProductDetails = () => {
 
                       <b
                         className={
-                          product.Stock > 1
+                          product.stock > 1
                             ? "text-green-800 "
                             : "text-red-800 "
                         }
                         style={{ marginLeft: "10px" }}
                       >
-                        {product.Stock < 1 ? "OutOfStock" : "InStock"}
+                        {product.stock < 1 ? "OutOfStock" : "InStock"}
                       </b>
                     </span>
                   </div>

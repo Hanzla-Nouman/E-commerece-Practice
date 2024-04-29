@@ -34,10 +34,10 @@ category:{
     required: [true,"Please Enter product Category:"],
 },
 
-Stock: {
+stock: {
     type: Number,
-    required: [true, "Please Enter product Stock"],
-    maxLength: [4, "Stock cannot exceed 4 characters"],
+    required: [true, "Please Enter product stock"],
+    maxLength: [4, "stock cannot exceed 4 characters"],
     default: 1,
   },
   numOfReviews: {

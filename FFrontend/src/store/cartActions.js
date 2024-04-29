@@ -11,7 +11,7 @@ import axios from "axios";
 //       product: data.product._id,     
 //       name: data.product.name,       
 //       image: data.product.images[0].url, 
-//       stock: data.product.Stock,
+//       stock: data.product.stock,
 //       quantity,
 //     },
 //   });
@@ -27,7 +27,7 @@ export const addItemsToCart = (id, quantity, cartItems) => async (dispatch) => {
       product: data.product._id,
       name: data.product.name,
       image: data.product.images[0].url,
-      stock: data.product.Stock,
+      stock: data.product.stock,
       quantity,
     },
   });
@@ -38,7 +38,7 @@ export const addItemsToCart = (id, quantity, cartItems) => async (dispatch) => {
     product: data.product._id,
     name: data.product.name,
     image: data.product.images[0].url,
-    stock: data.product.Stock,
+    stock: data.product.stock,
     quantity,
   }];
   localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
