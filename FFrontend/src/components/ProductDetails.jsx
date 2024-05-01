@@ -23,7 +23,7 @@ const ProductDetails = () => {
   const { cartItems } = useSelector(
     (state) => state.cartReducer
   );
-  console.log(cartItems)
+  // console.log(cartItems)
   
   const { product, loading, error } = useSelector(
     (state) => state.productDetailsReducer
@@ -61,7 +61,7 @@ const ProductDetails = () => {
   };
   const addToCartHandler = async() => {
     await dispatch(addItemsToCart(id,totalItems,cartItems))
-    console.log("success",id,"=======",totalItems,"===========",cartItems)
+    // console.log("success",id,"=======",totalItems,"===========",cartItems)
     // notify()
   };
 

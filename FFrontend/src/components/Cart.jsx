@@ -1,12 +1,17 @@
-import React from "react";
+import React,{useEffect} from "react";
 import CartItemCard from "./CartItemCard";
 import { useDispatch, useSelector } from "react-redux";
+// import { loadCartItemsFromStorage } from "../store/cartActions";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cartReducer);
-  // console.log(cartItems)
+  console.log(cartItems,"in cart")
 
+//   useEffect(() => {
+//     dispatch(loadCartItemsFromStorage());
+//   }, [dispatch]);
+// console.log(loadCartItemsFromStorage())
   return (
     <>
       <div >
@@ -24,7 +29,6 @@ const Cart = () => {
               {cartItems &&
                 cartItems.map((item) => (
                   <CartItemCard item={item} key={item.name} />
-                  
                 ))}
                 </div>
             </div>

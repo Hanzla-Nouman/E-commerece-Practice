@@ -4,15 +4,14 @@ import { useDispatch,useSelector } from "react-redux";
 const CartItemCard = ({ item }) => {
 
 const { cartItems } = useSelector((state) => state.cartReducer);
+// console.log(cartItems)
 const dispatch = useDispatch()
   const decreaseQuantity = (id,quantity) => { 
     quantity = quantity - 1;
-    console.log(id,quantity)
     dispatch(addItemsToCart(id,quantity,cartItems))
   };
   const increaseQuantity = (id,quantity,stock) => {
    quantity = quantity + 1;
-    console.log(id,quantity,stock)
     if (stock <= quantity) {
       return;
     }
@@ -33,6 +32,7 @@ const dispatch = useDispatch()
       <span>
         <div className="mt-2 mb-2" style={{ display: "flex" }}>
           <button
+          disabled={item.quantity === 1}
             className="button-input-cart uni"
             onClick={()=>decreaseQuantity(item.product,item.quantity)}
           >
