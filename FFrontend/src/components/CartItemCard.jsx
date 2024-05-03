@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { addItemsToCart } from "../store/cartActions";
+import { addItemsToCart, removeItemFromCart } from "../store/cartActions";
 import { useDispatch,useSelector } from "react-redux";
 const CartItemCard = ({ item }) => {
 
@@ -9,6 +9,9 @@ const dispatch = useDispatch()
   const decreaseQuantity = (id,quantity) => { 
     quantity = quantity - 1;
     dispatch(addItemsToCart(id,quantity,cartItems))
+  };
+  const removeItemCart = (id) => { 
+    dispatch(removeItemFromCart(id))
   };
   const increaseQuantity = (id,quantity,stock) => {
    quantity = quantity + 1;
@@ -55,7 +58,8 @@ const dispatch = useDispatch()
       </span>
       <span>${(item.price * item.quantity).toFixed(2)}</span>
       <span className="cross">
-        <span className="material-symbols-outlined">delete</span>
+            
+       <button onClick={()=>removeItemCart(item.product)}><span className="material-symbols-outlined">delete</span></button> 
       </span>
     </div>
   );

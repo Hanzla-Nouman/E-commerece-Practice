@@ -1,6 +1,6 @@
 
 
-import { ADD_TO_CART } from "./actionTypes";
+import { ADD_TO_CART, REMOVE_ITEM_CART } from "./actionTypes";
 import axios from "axios";
 
 
@@ -100,3 +100,18 @@ export const addItemsToCart = (id, quantity, cartItems) => async (dispatch) => {
 
   localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
 };
+
+
+export const removeItemFromCart = (id)=>async(dispatch)=>{
+  dispatch({
+    type: REMOVE_ITEM_CART,
+    payload: id
+  })
+  const cartItemsFromStorage = JSON.parse(localStorage.getItem("cartItems"));
+  console.log(cartItemsFromStorage)
+  const existingItemIndex = cartItemsFromStorage.findIndex(item => item.product === id);
+  console.log(`${existingItemIndex}`)
+  cartItemsFromStorage.splice(existingItemIndex, 1);
+ localStorage.setItem("cartItems", JSON.stringify(cartItemsFromStorage))
+  
+}
