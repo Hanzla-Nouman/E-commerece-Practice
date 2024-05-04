@@ -19,6 +19,7 @@ import store from "./store";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { loadUser, logout } from "./store/userActions";
 import Shipping from "./components/Shipping";
+import ConfirmOrder from "./components/ConfirmOrder";
 function App() {
   
   
@@ -48,6 +49,7 @@ function App() {
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/shipping" element={<Shipping />} />
+        <Route path="/order/confirm" element={<ConfirmOrder />} />
       </Routes>
       <Footer />
       </InputStateProvider>
