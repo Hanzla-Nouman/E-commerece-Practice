@@ -1,6 +1,6 @@
-import { ADD_TO_CART,REMOVE_ITEM_CART } from "./actionTypes";
+import { ADD_TO_CART,REMOVE_ITEM_CART, SAVE_SHIPPING_INFO } from "./actionTypes";
 
-const cartReducer = (state = { cartItems: [] }, action) => {
+const cartReducer = (state = { cartItems: [] ,shippingInfo:{}}, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       const item = action.payload;
@@ -24,10 +24,13 @@ const cartReducer = (state = { cartItems: [] }, action) => {
         };
       }case REMOVE_ITEM_CART:
       const cartItems = [...state.cartItems];
-
       return{
         ...state,cartItems:cartItems.filter((i)=>i.product !== action.payload)
       }
+      case SAVE_SHIPPING_INFO:
+         return{
+            ...state,shippingInfo: action.payload
+         }
     default:
       return state;
   }

@@ -41,9 +41,11 @@ export const login = (email, password, navigate) => async (dispatch) => {
       { email, password },
       config
     );
-    localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("isAuthenticated", true);
 
-    navigate("/account");
+    let url = window.location.pathname + window.location.search
+    let urlNavigate = url === "/login?redirect=/shipping" ? url.split("=")[1] : "/account"
+    navigate(urlNavigate);
 
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
@@ -63,9 +65,8 @@ export const signup = (userData, navigate) => async (dispatch) => {
       userData,
       config
     );
-    localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("isAuthenticated", true);
     navigate("/account");
-    // window.location.reload();
 
     dispatch({ type: SIGNUP_SUCCESS, payload: data.user });
   } catch (error) {

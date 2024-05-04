@@ -4,6 +4,7 @@ import { clearErrors, login } from "../store/userActions";
 import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
 import {Link} from "react-router-dom"
+import { useLocation } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,24 +23,18 @@ const Login = () => {
     e.preventDefault();
     try {
       await dispatch(login(loginEmail, loginPassword,navigate));
-      
     } catch (error) {
       console.error("Login failed:", error);
     }
   };
-  
-  useEffect(() => {
-    const storedIsAuthenticated = localStorage.getItem("isAuthenticated");
+
+ let url = location.pathname+location.search
+ let urlNavigate = url? url.split("=")[1] : "/account"
+
+
     
-    if (storedIsAuthenticated === true) {
-      navigate("/account");
-    } 
-    else {
-      navigate("/login");
-      
-    }
     
-  }, []);
+  // }, []);
   const emailRef = useRef(null);
   useEffect(() => {
     // Set focus on the input field when the component mounts
@@ -64,6 +59,7 @@ const Login = () => {
               paddingBottom: "60px",
             }}
           >
+           
             <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
               <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Login to our account

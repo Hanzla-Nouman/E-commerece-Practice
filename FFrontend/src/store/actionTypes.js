@@ -42,6 +42,8 @@ export const RESET_PASSWORD_FAILURE =  'RESET_PASSWORD_FAILURE';
 export const  ADD_TO_CART =  'ADD_TO_CART';
 export const  REMOVE_ITEM_CART =  'REMOVE_ITEM_CART';
 
+export const  SAVE_SHIPPING_INFO =  'SAVE_SHIPPING_INFO';
+
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 

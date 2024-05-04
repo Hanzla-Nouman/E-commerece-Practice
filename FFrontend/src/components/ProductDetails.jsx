@@ -60,9 +60,7 @@ const ProductDetails = () => {
     setTotalItems((totalItems) => totalItems + 1);
   };
   const addToCartHandler = async() => {
-    await dispatch(addItemsToCart(id,totalItems,cartItems))
-    // console.log("success",id,"=======",totalItems,"===========",cartItems)
-    // notify()
+    await dispatch(addItemsToCart(id,totalItems))
   };
 
   return (
