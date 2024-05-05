@@ -24,6 +24,8 @@ cloudinary.config({
 
 const server = app.listen(process.env.PORT, () => {
   console.log(`listening on ${process.env.PORT}`);
+  
+
 });
 
 // Unhandled Promise Rejection // To shutdown the server in case of error

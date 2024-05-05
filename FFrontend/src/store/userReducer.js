@@ -45,6 +45,7 @@ export const userReducer = (state = { user: {} }, action) => {
         isAuthenticated: true,
         user: action.payload,
         userRole: action.payload.role,
+        username: action.payload.name,
 
         // avatar: action.payload.avatar
       };

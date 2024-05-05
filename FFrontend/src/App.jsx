@@ -20,15 +20,32 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { loadUser, logout } from "./store/userActions";
 import Shipping from "./components/Shipping";
 import ConfirmOrder from "./components/ConfirmOrder";
+import Payment from "./components/Payment";
+import axios from "axios";
+import { Elements} from "@stripe/react-stripe-js"
+import {loadStripe} from "@stripe/stripe-js"
 function App() {
-  
+  const [stripeApiKey, setStripeApiKey] = React.useState(null);
   
   useEffect(() => {
+    store.dispatch(loadUser());
+    fetchStripeApiKey();
+  }, []);
 
-    store.dispatch(loadUser())
-  
-}, [])
 
+  async function fetchStripeApiKey() {
+    try {
+      const {data} = await axios.get("http://localhost:4000/api/v1/stripeapikey");
+      setStripeApiKey(data.stripeApiKey);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  if (stripeApiKey === null) {
+    // If stripeApiKey is not yet available, return null or a loading indicator
+    return null;
+  }
+  const stripePromise= loadStripe(stripeApiKey)
 
 
 
@@ -37,6 +54,7 @@ function App() {
       <React.StrictMode>
       <InputStateProvider>
       <Navbar />
+     <Elements stripe={stripePromise}>
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Home/>} />
@@ -50,7 +68,10 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/order/confirm" element={<ConfirmOrder />} />
+       <Route path="/process/payment" element={<Payment />} />
+        
       </Routes>
+        </Elements>
       <Footer />
       </InputStateProvider>
       </React.StrictMode>

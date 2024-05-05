@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <>
-    {!loading && (<div className="navbar bg-base-300">
+    {!loading && (<div className="navbar bg-base-300" style={{zIndex:"2"}}>
   <div className="flex-1">
     <a className="btn btn-ghost text-xl">UrbanAura</a>
     <div className="navbar-center hidden lg:flex">
