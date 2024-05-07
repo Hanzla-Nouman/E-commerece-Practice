@@ -300,6 +300,7 @@ html {
 
   .paymentInput {
     padding: 4vw 10vw;
+    background: #000;
   }
 
   .paymentForm > div > svg {
