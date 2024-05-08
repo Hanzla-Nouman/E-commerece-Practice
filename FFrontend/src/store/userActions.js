@@ -185,7 +185,7 @@ export const forgetPassword = (email) => async (dispatch) => {
     const { data } = await axios.post(
       "http://localhost:4000/api/v1/password/forgot",
       { email },
-      config
+      config 
     );
 
     dispatch({ type: FORGET_PASSWORD_SUCCESS, payload: data.user });

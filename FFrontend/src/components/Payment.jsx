@@ -54,9 +54,8 @@ const order = {
    e.preventDefault()
     try {
       const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
       };
       const { data } = await axios.post(
         "http://localhost:4000/api/v1/payment/process",

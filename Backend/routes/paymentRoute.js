@@ -8,6 +8,6 @@ const {
 
 router.route("/payment/process").post( processPayment);
 
-router.route("/stripeapikey").get(isAuthenticatedUser ,sendStripeApiKey); //Missind auth
+router.route("/stripeapikey").get(sendStripeApiKey); //Missind auth
 module.exports = router;
    
