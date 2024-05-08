@@ -5,6 +5,7 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 
 // Create new Order
 exports.newOrder = catchAsyncError(async (req, res, next) => {
+  console.log("neworderr working")
   const {
     shippingInfo,
     orderItems,
@@ -14,8 +15,9 @@ exports.newOrder = catchAsyncError(async (req, res, next) => {
     shippingPrice,
     totalPrice,
   } = req.body;
-
+console.log("user....",req.user._id.toHexString())
   const order = await Order.create({
+    user: req.user._id.toHexString(), 
     shippingInfo,
     orderItems,
     paymentInfo,
@@ -24,7 +26,6 @@ exports.newOrder = catchAsyncError(async (req, res, next) => {
     shippingPrice,
     totalPrice,
     paidAt: Date.now(),
-    user: req.user._id,
   });
 
   res.status(201).json({

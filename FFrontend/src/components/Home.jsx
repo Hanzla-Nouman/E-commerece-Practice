@@ -64,7 +64,7 @@ const Home = () => {
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   };
-
+ 
   const handleApply = () => {
     dispatch(fetchProduct(currentPage, result, minValue, maxValue,category,ratings));
   };

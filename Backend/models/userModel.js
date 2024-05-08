@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
+const bcrypt = require("bcryptjs");   
+const jwt = require("jsonwebtoken");  
+const crypto = require("crypto"); 
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
   avatar: {
-
+ 
     public_id: {
       type: String,
       required: false,
@@ -33,11 +33,11 @@ const userSchema = new mongoose.Schema({
     url: {
       type: String,
       required: false,
-      default:"https://github.com/meabhisingh/mernProjectEcommerce/blob/master/frontend/src/images/Profile.png?raw=true"
+      default:"https://github.com/meabhisingh/mernProjectEcommerce/blob/master/frontend/src/images/Profile.png?raw=true"  
     },
-  },
-  role: {
-    type: String,
+  }, 
+  role: { 
+    type: String,     
     default: "user",
   },
   createdAt: {
@@ -50,20 +50,21 @@ const userSchema = new mongoose.Schema({
 });
 
 // Middleware to hash the password before saving
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function (next) { 
   // Hash the password if it's modified or new
-  if (!this.isModified("password")) {
+  if (!this.isModified("password")) { 
     //  the next() function is used to signal to Mongoose that the middleware has completed its operations and that the middleware chain should proceed to the next middleware in line (if any), or ultimately, to save the document.
     next();
   }
-  this.password = await bcrypt.hash(this.password, 10);
-});
+  this.password = await bcrypt.hash(this.password, 10);  
+});  
 
-// JWT TOKEN
-// getJWTToken is a custom method created by the developer
+// JWT TOKEN 
+// getJWTToken is a custom method created by me
 userSchema.methods.getJWTToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE,
+    // expiresIn: process.env.JWT_EXPIRE,
+    expiresIn: "7d",
   });
 };
 

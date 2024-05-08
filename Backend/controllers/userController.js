@@ -35,7 +35,7 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
 });
 
 exports.logoutUser = catchAsyncError(async (req, res, next) => {
-  console.log("Current token cookie:", req.cookies.token); // Log current token cookie value
+ // Log current token cookie value
 
   res.cookie("token", "", {
     expires: new Date(0),  // Set the expires date to a past date
@@ -118,12 +118,13 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
   await user.save();
-
+ 
   sendToken(user, 200, res);
 });
 
 // Get User Detail
 exports.getUserDetails = catchAsyncError(async (req, res, next) => {
+ 
   const user = await User.findById(req.user.id); // If login then req.user stores whole user
 
   res.status(200).json({

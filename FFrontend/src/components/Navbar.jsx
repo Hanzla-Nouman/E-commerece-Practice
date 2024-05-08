@@ -13,7 +13,7 @@ const Navbar = () => {
     dispatch(logout())
     navigate("/")
   }
-  let {userRole,isAuthenticated,loading,user} = useSelector(state => state.userReducer)
+  let {userRole,isAuthenticated,loading,username} = useSelector(state => state.userReducer)
   let {cartItems} = useSelector(state => state.cartReducer)
 
   return (
@@ -51,14 +51,14 @@ const Navbar = () => {
           <Link to={"cart"}><div className="card-actions">
             <button className="btn btn-primary btn-block btn-sm">View cart</button>
           </div></Link>
-        </div>
+        </div> 
       </div>
     </div> 
    {(localStorage.getItem("isAuthenticated"))? ( <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-12 rounded-full" style={{background:"#fff",alignItems:"center",display:"flex",justifyContent:"center"}}>
-          {/* <h1 className='text-3xl'>{user.name.split("")[0]}</h1> */}
-          <h1 className='text-3xl'>H</h1>
+          <h1 className='text-3xl'>{username.split("")[0]}</h1> 
+          {/* <h1 className='text-3xl'>H</h1> */}
         </div>
       </div>
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-slate-200 rounded-box w-24">
