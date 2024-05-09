@@ -46,6 +46,7 @@ export const userReducer = (state = { user: {} }, action) => {
         user: action.payload,
         userRole: action.payload.role,
         username: action.payload.name,
+        userId: action.payload._id,
 
         // avatar: action.payload.avatar
       };

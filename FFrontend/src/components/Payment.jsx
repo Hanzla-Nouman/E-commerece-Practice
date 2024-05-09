@@ -60,7 +60,10 @@ const order = {
       const { data } = await axios.post(
         "http://localhost:4000/api/v1/payment/process",
         paymentData,
-        config
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
       );
       const client_secret = data.client_secret;
 
@@ -89,7 +92,7 @@ const order = {
         status:result.paymentIntent.status,
       }
       dispatch(createOrder(order))
-      // navigate("/success")
+      navigate("/success")
     }else{
       console.log("There is some issue while processing payment")
     }

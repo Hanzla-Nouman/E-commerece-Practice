@@ -21,7 +21,7 @@ const corsOptions = {
   app.use(cookieParser())
   app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload()); 
-
+ 
 // Middleware for error
 
 // Route Imports -------------------------------------------

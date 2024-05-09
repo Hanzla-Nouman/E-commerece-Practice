@@ -6,8 +6,8 @@ const {
   sendStripeApiKey, 
 } = require("../controllers/paymentController");
 
-router.route("/payment/process").post( processPayment);
+router.route("/payment/process").post(isAuthenticatedUser, processPayment);
 
-router.route("/stripeapikey").get(sendStripeApiKey); //Missind auth
+router.route("/stripeapikey").get(sendStripeApiKey); //Missing isAuthenticatedUser
 module.exports = router;
-   
+    

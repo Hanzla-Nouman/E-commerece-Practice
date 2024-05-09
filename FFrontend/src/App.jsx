@@ -25,6 +25,7 @@ import axios from "axios";
 import { Elements} from "@stripe/react-stripe-js"
 import {loadStripe} from "@stripe/stripe-js"
 import OrderSuccess from "./components/OrderSuccess";
+import MyOrders from "./components/MyOrders";
 function App() {
   const [stripeApiKey, setStripeApiKey] = React.useState(null);
   
@@ -57,7 +58,7 @@ function App() {
       <InputStateProvider>
       <Navbar />
      <Elements stripe={stripePromise}>
-      <Routes>
+      <Routes>  
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Home/>} />
         <Route path="/product/:id" element={<ProductDetails />} />
@@ -72,6 +73,7 @@ function App() {
         <Route path="/order/confirm" element={<ConfirmOrder />} />
        <Route path="/process/payment" element={<Payment />} />
        <Route path="/success" element={<OrderSuccess />} />
+       <Route path="/orders" element={<MyOrders />} />
         
       </Routes>
         </Elements>

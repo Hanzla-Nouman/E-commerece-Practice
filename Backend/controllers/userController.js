@@ -124,7 +124,6 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
 
 // Get User Detail
 exports.getUserDetails = catchAsyncError(async (req, res, next) => {
- 
   const user = await User.findById(req.user.id); // If login then req.user stores whole user
 
   res.status(200).json({

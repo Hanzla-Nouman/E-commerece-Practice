@@ -7,7 +7,7 @@ exports.processPayment = catchAsyncError(async (req, res, next) => {
     currency: "inr",
     metadata: {
       company: "Ecommerce",
-    },
+    },  
   });
   res
   .status(200) 
@@ -15,6 +15,5 @@ exports.processPayment = catchAsyncError(async (req, res, next) => {
 });
 
 exports.sendStripeApiKey = catchAsyncError(async(req,res,next)=>{
-   console.log("Sending Stripe API Key")
     res.status(200).json({stripeApiKey: process.env.STRIPE_API_KEY})
 }) 
