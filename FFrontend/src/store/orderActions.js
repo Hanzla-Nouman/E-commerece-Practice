@@ -2,7 +2,7 @@ import {CLEAR_ERRORS, CREATE_ORDER_FAILURE, CREATE_ORDER_REQUEST, CREATE_ORDER_S
 import axios from "axios"
 
 export const createOrder =(order)=>async(dispatch)=>{
-try {           
+try {            
     dispatch({type:CREATE_ORDER_REQUEST}) ;
     const config = {
         headers: { "Content-Type": "application/json" },
@@ -19,7 +19,16 @@ export const myOrders =()=>async(dispatch)=>{
 try {           
     dispatch({type:MY_ORDERS_REQUEST});  
     
-    const {data} = await axios.get("http://localhost:4000/api/v1/ordersme")
+    const {data} = await axios.get("http://localhost:4000/api/v1/ordersme",
+    // {
+    //     headers: {
+    //     'Authorization': 'Bearer your_token_here',
+    //     'Content-Type': 'application/json',
+    //     'User-Id': 9090909090909 // Adding user ID to headers
+    //     // add other headers as needed // Dummy
+    //   }
+    // }
+)
     dispatch({type:MY_ORDERS_SUCCESS, payload:data.orders});
 
 } catch (error) {
