@@ -51,17 +51,18 @@ exports.getSingleOrder = catchAsyncError(async (req, res, next) => {
 
 // get logged in user  Orders  
 exports.myOrders = catchAsyncError(async (req, res, next) => {
-  const createdId  = "663b45ab349f3431dcd692ce"
-  
-  console.log("created Id")
-  console.log(req.headers)
+  // const id = req.headers.id
   try{
-    // const orders = await Order.find({ user: createdId });
-    const orders = await Order.find({ user: req.user._id })
+
+   console.log( req.headers.authorization)
+   console.log( req.headers['user-id'])
+  const id = req.headers['user-id']
+  
+    const orders = await Order.find({ user: id})
    
     res.status(200).json({
       success: true,
-      orders, 
+      orders,  
     });}  catch (error) {
       console.log("error by user is ",error)
     }

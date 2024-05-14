@@ -1,6 +1,6 @@
-import {CLEAR_ERRORS, CREATE_ORDER_FAILURE, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, MY_ORDERS_FAILURE, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS} from "./actionTypes"
+import {CLEAR_ERRORS, CREATE_ORDER_FAILURE, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, MY_ORDERS_FAILURE, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS,ORDER_DETAIL_FAILURE,ORDER_DETAIL_SUCCESS,ORDER_DETAIL_REQUEST} from "./actionTypes"
 import axios from "axios"
-
+ 
 export const createOrder =(order)=>async(dispatch)=>{
 try {            
     dispatch({type:CREATE_ORDER_REQUEST}) ;
@@ -13,26 +13,39 @@ try {
 
 } catch (error) {
     dispatch({type:CREATE_ORDER_FAILURE, payload:error.response.data.message});
+}  
 } 
-}
-export const myOrders =()=>async(dispatch)=>{
+export const myOrders =(id)=>async(dispatch)=>{ 
+    console.log(id,"at myOrders")
 try {           
-    dispatch({type:MY_ORDERS_REQUEST});  
+    dispatch({type:MY_ORDERS_REQUEST});   
     
     const {data} = await axios.get("http://localhost:4000/api/v1/ordersme",
-    // {
-    //     headers: {
-    //     'Authorization': 'Bearer your_token_here',
-    //     'Content-Type': 'application/json',
-    //     'User-Id': 9090909090909 // Adding user ID to headers
-    //     // add other headers as needed // Dummy
-    //   }
-    // }
-)
+    { 
+        headers: {
+        'Authorization': ` Tokenhere ${id} `,
+        'Content-Type': 'application/json',
+        'User-Id': id
+        // Adding user ID to headers
+        // add other headers as needed 
+      }
+    }
+) 
     dispatch({type:MY_ORDERS_SUCCESS, payload:data.orders});
 
 } catch (error) {
     dispatch({type:MY_ORDERS_FAILURE, payload:error.response.data.message});
+}
+} 
+export const getOrdersDetails =(id)=>async(dispatch)=>{ 
+try {           
+    dispatch({type:ORDER_DETAIL_REQUEST});   
+    
+    const {data} = await axios.get(`http://localhost:4000/api/v1/order/${id}`) 
+    dispatch({type:ORDER_DETAIL_SUCCESS, payload:data.order});
+
+} catch (error) {
+    dispatch({type:ORDER_DETAIL_FAILURE, payload:error.response.data.message});
 }
 } 
 

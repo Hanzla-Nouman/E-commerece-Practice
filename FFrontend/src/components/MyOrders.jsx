@@ -11,7 +11,14 @@ const MyOrders = () => {
     (state) => state.myOrderReducer
   );
   const { username, userId } = useSelector((state) => state.userReducer);
-
+  useEffect(() => {
+    if(userId){
+    console.log(userId)
+    dispatch(myOrders(userId));
+    }else{
+      console.log("No userId")
+    }
+  }, [dispatch,userId]);
   const columns = [
     {
       field: "id",
@@ -52,8 +59,8 @@ const MyOrders = () => {
       sortable: false,
       renderCell: (params) => {
         return (
-          <Link to={`/orders/${params.getValue(params.id, "id")}`}>
-            <span class="material-symbols-outlined">
+          <Link to={`/order/${params.getValue(params.id, "id")}`}>
+            <span className="material-symbols-outlined">
 file_open
 </span>
           </Link>
@@ -74,18 +81,18 @@ file_open
       });
   }
 
-  useEffect(() => {
-    dispatch(myOrders());
-  }, []);
+  
 
   return (
     <>
-      <h1 className="text-3xl font-bold text-center m-3">My orders</h1>
+      <h1 className="text-3xl font-bold text-center m-3">{username}'s orders</h1>
+      <h1 className="text-3xl font-bold text-center m-3">{userId}'s orders</h1>
       {loading ? (
         <Loader />
-      ) : (
+      ) : ( 
         <div>
-          <DataGrid
+
+          <DataGrid 
             rows={rows}
             columns={columns}
             pageSize={10}

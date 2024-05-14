@@ -21,6 +21,7 @@ import { loadUser, logout } from "./store/userActions";
 import Shipping from "./components/Shipping";
 import ConfirmOrder from "./components/ConfirmOrder";
 import Payment from "./components/Payment";
+import OrderDetails from "./components/OrderDetails";
 import axios from "axios";
 import { Elements} from "@stripe/react-stripe-js"
 import {loadStripe} from "@stripe/stripe-js"
@@ -38,7 +39,6 @@ function App() {
   async function fetchStripeApiKey() {
     try {
       const {data} = await axios.get("http://localhost:4000/api/v1/stripeapikey");
-      console.log(data.stripeApiKey)
       setStripeApiKey(data.stripeApiKey);
     } catch (error) {
       console.error("here is an error",error);
@@ -74,6 +74,7 @@ function App() {
        <Route path="/process/payment" element={<Payment />} />
        <Route path="/success" element={<OrderSuccess />} />
        <Route path="/orders" element={<MyOrders />} />
+       <Route path="/order/:id" element={<OrderDetails />} />
         
       </Routes>
         </Elements>

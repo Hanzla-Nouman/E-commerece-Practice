@@ -112,7 +112,7 @@ const Navbar = () => {
                     <>
                       <li>
                         <Link to={"/account"}>
-                          <span class="material-symbols-outlined">
+                          <span className="material-symbols-outlined">
                             account_circle
                           </span>
                           Profile
@@ -120,7 +120,7 @@ const Navbar = () => {
                       </li>
                       <li>
                         <Link to={"/orders"}>
-                          <span class="material-symbols-outlined">orders</span>
+                          <span className="material-symbols-outlined">orders</span>
                           Orders
                         </Link>
                       </li>
@@ -128,7 +128,7 @@ const Navbar = () => {
                   )}
                   <li onClick={logoutUser}>
                     <a>
-                      <span class="material-symbols-outlined">logout</span>
+                      <span className="material-symbols-outlined">logout</span>
                       Logout
                     </a>
                   </li>
