@@ -1,9 +1,9 @@
 import {CLEAR_ERRORS, CREATE_ORDER_FAILURE, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, MY_ORDERS_FAILURE, MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS,ORDER_DETAIL_FAILURE,ORDER_DETAIL_SUCCESS,ORDER_DETAIL_REQUEST} from "./actionTypes"
-import axios from "axios"
- 
+import axios from "axios" 
+  
 export const createOrder =(order)=>async(dispatch)=>{
 try {            
-    dispatch({type:CREATE_ORDER_REQUEST}) ;
+    dispatch({type:CREATE_ORDER_REQUEST}) ;  
     const config = {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
@@ -33,7 +33,7 @@ try {
 ) 
     dispatch({type:MY_ORDERS_SUCCESS, payload:data.orders});
 
-} catch (error) {
+} catch (error) { 
     dispatch({type:MY_ORDERS_FAILURE, payload:error.response.data.message});
 }
 } 

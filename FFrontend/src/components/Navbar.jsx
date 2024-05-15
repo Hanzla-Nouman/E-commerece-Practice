@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <>
-      {!loading && (
+      
         <div className="navbar bg-base-300" style={{ zIndex: "2" }}>
           <div className="flex-1">
             <a className="btn btn-ghost text-xl">UrbanAura</a>
@@ -96,7 +96,8 @@ const Navbar = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <h1 className="text-3xl">{username.split("")[0]}</h1>
+                    {/* <h1 className="text-3xl">{username.split("")[0]}</h1> */}
+                    <h1 className="text-3xl">H</h1>
                   </div>
                 </div>
                 <ul
@@ -146,7 +147,7 @@ const Navbar = () => {
             )}
           </div>
         </div>
-      )}
+      
     </>
   );
 };

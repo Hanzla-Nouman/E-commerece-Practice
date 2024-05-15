@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import './App.css'
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, } from "react-router-dom";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import UpdateProfile from "./components/UpdateProfile";
@@ -14,10 +14,9 @@ import { InputStateProvider } from "./context/inputContext";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Account from "./components/Account";
-import { useSelector,useDispatch } from "react-redux";
 import store from "./store";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { loadUser, logout } from "./store/userActions";
+import { loadUser } from "./store/userActions";
 import Shipping from "./components/Shipping";
 import ConfirmOrder from "./components/ConfirmOrder";
 import Payment from "./components/Payment";
@@ -31,8 +30,12 @@ function App() {
   const [stripeApiKey, setStripeApiKey] = React.useState(null);
   
   useEffect(() => {
-    store.dispatch(loadUser());
-    fetchStripeApiKey();
+    const auth = localStorage.getItem('isAuthenticated'); 
+    console.log(auth)
+    if (auth === true || auth === "true") {
+      store.dispatch(loadUser());
+      fetchStripeApiKey();
+    }
   }, []);
 
 
@@ -70,11 +73,11 @@ function App() {
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/shipping" element={<Shipping />} />
-        <Route path="/order/confirm" element={<ConfirmOrder />} />
        <Route path="/process/payment" element={<Payment />} />
        <Route path="/success" element={<OrderSuccess />} />
        <Route path="/orders" element={<MyOrders />} />
-       <Route path="/order/:id" element={<OrderDetails />} />
+        <Route path="/order/confirm" element={<ConfirmOrder />} />
+       <Route path="/orders/:id" element={<OrderDetails />} />
         
       </Routes>
         </Elements>
