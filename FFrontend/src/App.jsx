@@ -30,12 +30,18 @@ function App() {
   const [stripeApiKey, setStripeApiKey] = React.useState(null);
   
   useEffect(() => {
+
     const auth = localStorage.getItem('isAuthenticated'); 
-    console.log(auth)
-    if (auth === true || auth === "true") {
-      store.dispatch(loadUser());
-      fetchStripeApiKey();
+    console.log(auth) 
+    fetchStripeApiKey();
+    if (auth === null) {
+    return
     }
+    if (auth === true || auth === "true") {
+      console.log("i am inside cond")
+      store.dispatch(loadUser());
+    }
+   
   }, []);
 
 
@@ -62,8 +68,8 @@ function App() {
       <Navbar />
      <Elements stripe={stripePromise}>
       <Routes>  
-        <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Home/>} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />

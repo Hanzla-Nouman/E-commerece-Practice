@@ -67,9 +67,9 @@ export const orderDetailReducer = (state = {order:[]},action)=>{
         case ORDER_DETAIL_FAILURE:
             return {
                 loading: false,
-                error: action.payload, 
+                error: action.payload,  
             };
-        case CLEAR_ERRORS: 
+        case CLEAR_ERRORS:  
             return {
                ...state,
                 error: null, 
