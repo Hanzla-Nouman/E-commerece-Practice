@@ -8,9 +8,9 @@ const mongoose = require("mongoose");
 //     });
 //     //Dont needed bcs we're using "Unhandled Promise Rejection"
 //   // .catch((err)=>{     
-//   //     console.log("Error:",err)
+//   //     console.log("Error:",err) 
 //   // }) 
-// }; 
+// };   
 const connectDB = () => { 
   mongoose  
     .connect(process.env.DB_URI)   
@@ -20,7 +20,7 @@ const connectDB = () => {
     .catch((err) => { 
       console.log(process.env.DB_URI)
       console.log("Error connecting to the database:", err);
-    });
+    }); 
 };
 
-module.exports = connectDB;
+module.exports = connectDB; 

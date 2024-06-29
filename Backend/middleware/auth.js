@@ -3,10 +3,10 @@ const ErrorHandler = require("../utils/errorHandler");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel"); 
   
-           
+            
 exports.isAuthenticatedUser = async (req, res, next) => {
   
-    const { token } =  req.cookies; 
+    const { token } =  req.cookies;  
     console.log(token,"me") 
      
     if (!token) {
