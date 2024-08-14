@@ -3,7 +3,7 @@ import {  useNavigate } from "react-router-dom";
 import CartItemCard from "./CartItemCard";
 import { useDispatch, useSelector } from "react-redux";
 import Nothing from "./Nothing";
-
+  
 const Cart = () => {
   const dispatch = useDispatch();
   
